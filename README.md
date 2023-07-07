@@ -1,7 +1,7 @@
 # AttentionRollout ReImplementation
 Adapt original reimplementation of Attention Rollout by https://github.com/jacobgil/vit-explain.
 
-### Motivation: From visualizing Attention Map, the main motivation is to see #how much impact# each topic affects the attention-layer and accuracy: ###
+### Motivation: From visualizing Attention Map, the main motivation is to see ***how much impact*** each topic affects the attention-layer and accuracy: ###
 - Representation vs Based Learning to pretrain Vision Transformer (ViT):
      - [ ] Based Learning:
      - [ ] Self-supervised Vision Transformer 2021: https://github.com/Sara-Ahmed/SiT
