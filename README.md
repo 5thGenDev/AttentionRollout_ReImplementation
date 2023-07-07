@@ -2,6 +2,8 @@
 Adapt original reimplementation of Attention Rollout by https://github.com/jacobgil/vit-explain.
 
 The main motivation is to see how following topics affects the Attention Map:
+ Markup : - [ ] An uncompleted task
+              - [ ] A subtask
 - Representation vs Based Learning to pretrain model:
 - [ ] Based Learning:
 -    [ ] ????:
