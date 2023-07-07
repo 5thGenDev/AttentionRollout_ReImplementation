@@ -3,15 +3,11 @@ Adapt original reimplementation of Attention Rollout by https://github.com/jacob
 
 The main motivation is to see how following topics affects the Attention Map:
 - [ ] Representation vs Based Learning to pretrain model:
-          - Based Learning:
-
-
-
-
+          - [ ] Based Learning:
                     - [ ] ????:
-          - Representation Learning:
+          - [ ] Representation Learning:
                     - [ ] Self-supervised Vision Transformer: https://github.com/Sara-Ahmed/SiT
-          - Different latest optimizers:
+          - [ ] Different latest optimizers:
                     - [ ] SAM: https://github.com/davda54/sam 
 
 Future work will use those aforementioned pretrained ViT as backbone Video Diffusion using SOTA visualizer than Attention Rollout
