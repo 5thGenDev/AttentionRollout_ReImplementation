@@ -1,15 +1,23 @@
 # AttentionRollout ReImplementation
 Adapt original reimplementation of Attention Rollout by https://github.com/jacobgil/vit-explain.
 
-The main motivation is to see how following topics affects the Attention Map:
-- [ ] An uncompleted task
-     - [ ] A subtask
+From visualizing Attention Map, the main motivation is to see how following topics affects the attention-layer:
 - Representation vs Based Learning to pretrain model:
-- [ ] Based Learning:
--    [ ] ????:
-          - [ ] Representation Learning:
-                    - [ ] Self-supervised Vision Transformer: https://github.com/Sara-Ahmed/SiT
-          - [ ] Different latest optimizers:
-                    - [ ] SAM: https://github.com/davda54/sam 
+     - [ ] Based Learning:
+     - [ ] Self-supervised Vision Transformer 2021: https://github.com/Sara-Ahmed/SiT
+           
+- Latest optimizers:
+     - [ ] SAM: https://github.com/davda54/sam 
 
-Future work will use those aforementioned pretrained ViT as backbone Video Diffusion using SOTA visualizer than Attention Rollout
+- Different Attention-layer in ViT:
+     - [ ] Accurate Image Restoration with Attention Retractable Transformer: https://github.com/gladzhang/ART
+
+- U-Net backbone for Diffusion Model:
+     - [ ] Art style diffusion: https://github.com/ChenDarYen/ArtFusion
+     - [ ] Prompt-to-Prompt Image Editing with Cross-Attention Control: https://github.com/AUTOMATIC1111/stable-diffusion-webui/issues/2725. *Learning how to use to general stable-diffusion is a tough learning curve ___but worth it in long term___*
+
+- ViT backbone for Diffusion Model:
+     - [ ] Fast Training of Diffusion Models with Masked Transformers: https://github.com/Anima-Lab/MaskDiT
+     - [ ] ***VDT: An Empirical Study for Video Diffusion with Transformers***: https://github.com/RERV/VDT
+     - [ ] *Masked Diffusion Transformer is a Strong Image Synthesizer*: https://github.com/sail-sg/MDT
+     - [ ] Paper to read as baseline: Exploring Transformer Backbones for Image Diffusion Models
