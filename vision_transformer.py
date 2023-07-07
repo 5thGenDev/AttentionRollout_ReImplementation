@@ -107,6 +107,40 @@ class Attention(nn.Module):
         return x, attn
 
 
+### Hydra Attention to replace Self-Attention
+# As long as # Head (H) = # Token then this stays linear
+# d_model = dim = feature_dim [https://datascience.stackexchange.com/questions/93768/dimensions-of-transformer-dmodel-and-depth]
+class HydraAttention(nn.Module):
+    def __init__(self, dim, output_layer='linear', dropout=0.0):
+        super(HydraAttention, self).__init__()
+        self.d_model = dim
+        self.qkv = nn.Linear(dim, d_model * 3)
+        self.out = nn.Linear(dim, d_model) if output_layer == 'linear' else nn.Identity()
+        self.dropout = nn.Dropout(dropout) 
+
+    def forward(self, x, mask=None):
+        '''x: (B, T, dim)'''
+         """
+            q, k, and v should all be tensors of shape
+            [batch, tokens, dim_features]
+        """
+        q, k, v = self.qkv(x).chunk(3, dim=-1) 
+
+        # cosine similarity kernel for q, k
+        q = q / q.norm(dim=-1, keepdim=True)  
+        k = k / k.norm(dim=-1, keepdim=True)
+        if mask is not None:
+            k = k.masked_fill(mask.unsqueeze(-1), 0)
+            
+        kv = k * v
+        #  kv = (k * v).sum(dim=-2), keepdim=True)
+        if self.dropout.p > 0:
+            kv = self.dropout(kv.transpose(-1, -2)).transpose(-1, -2) # dropout in seq dimension 
+        out = kv.sum(dim=-2, keepdim=True) * q
+        # out = q * kv
+        return self.out(out)
+
+
 # Multi-head Attention
 class Block(nn.Module):
     def __init__(self, dim, num_heads, mlp_ratio=4., qkv_bias=False, qk_scale=None, drop=0., attn_drop=0.,
@@ -127,39 +161,6 @@ class Block(nn.Module):
         x = x + self.drop_path(y)
         x = x + self.drop_path(self.mlp(self.norm2(x)))
         return x
-
-
-### Hydra-head to replace Soft-max(KV) portion in Self-Attention
-# Which influences Multi-head Attention as well
-# d_model = dim = feature_dim [https://datascience.stackexchange.com/questions/93768/dimensions-of-transformer-dmodel-and-depth]
-class HydraAttention(nn.Module):
-    def __init__(self, dim, output_layer='linear', dropout=0.0):
-        super(HydraAttention, self).__init__()
-        self.d_model = dim
-        self.qkv = nn.Linear(dim, d_model * 3)
-        self.out = nn.Linear(dim, d_model) if output_layer == 'linear' else nn.Identity()
-        self.dropout = nn.Dropout(dropout) 
-
-    def forward(self, x, mask=None):
-        '''x: (B, T, dim)'''
-         """
-            q, k, and v should all be tensors of shape
-            [batch, tokens, dim_features]
-        """
-        q, k, v = self.qkv(x).chunk(3, dim=-1) 
-
-        q = q / q.norm(dim=-1, keepdim=True)
-        k = k / k.norm(dim=-1, keepdim=True)
-        if mask is not None:
-            k = k.masked_fill(mask.unsqueeze(-1), 0)
-            
-        kv = k * v
-        #  kv = (k * v).sum(dim=-2), keepdim=True)
-        if self.dropout.p > 0:
-            kv = self.dropout(kv.transpose(-1, -2)).transpose(-1, -2) # dropout in seq dimension 
-        out = kv.sum(dim=-2, keepdim=True) * q
-        # out = q * kv
-        return self.out(out)
 
 
 class PatchEmbed(nn.Module):
