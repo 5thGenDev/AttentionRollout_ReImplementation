@@ -1,5 +1,3 @@
-### Copied from https://github.com/jacobgil/vit-explain/blob/main/vit_rollout.py ### 
-
 import torch
 from PIL import Image
 import numpy
