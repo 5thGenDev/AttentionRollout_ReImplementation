@@ -19,8 +19,8 @@ Adapt original reimplementation of Attention Rollout by https://github.com/jacob
 
 - ViT backbone for Diffusion Model:
      - [ ] Fast Training of Diffusion Models with Masked Transformers: https://github.com/Anima-Lab/MaskDiT
-     - [ ] ***VDT: An Empirical Study for Video Diffusion with Transformers***: https://github.com/RERV/VDT
-     - [ ] *Masked Diffusion Transformer is a Strong Image Synthesizer*: https://github.com/sail-sg/MDT
+     - [ ] **VDT: An Empirical Study for Video Diffusion with Transformers**: https://github.com/RERV/VDT
+     - [ ] Masked Diffusion Transformer is a Strong Image Synthesizer: https://github.com/sail-sg/MDT
      - [ ] Paper to read as baseline: Exploring Transformer Backbones for Image Diffusion Models
 
 
