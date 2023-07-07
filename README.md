@@ -10,11 +10,12 @@ Adapt original reimplementation of Attention Rollout by https://github.com/jacob
      - [ ] SAM: https://github.com/davda54/sam 
 
 - Different Attention-layer in ViT:
+     - [ ] Hydra Attention: Hydra Attention: Efficient Attention with Many Heads: https://arxiv.org/abs/2209.07484 
      - [ ] Accurate Image Restoration with Attention Retractable Transformer: https://github.com/gladzhang/ART
 
 - U-Net backbone for Diffusion Model:
      - [ ] Art style diffusion: https://github.com/ChenDarYen/ArtFusion
-     - [ ] Prompt-to-Prompt Image Editing with Cross-Attention Control: https://github.com/AUTOMATIC1111/stable-diffusion-webui/issues/2725. *Learning how to use to general stable-diffusion is a tough learning curve ___but worth it in long term___*
+     - [ ] Prompt-to-Prompt Image Editing with Cross-Attention Control: https://github.com/AUTOMATIC1111/stable-diffusion-webui/issues/2725. *Learning how to use to general stable-diffusion is a tough learning curve **but worth it in long term**
 
 - ViT backbone for Diffusion Model:
      - [ ] Fast Training of Diffusion Models with Masked Transformers: https://github.com/Anima-Lab/MaskDiT
