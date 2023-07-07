@@ -4,6 +4,10 @@ Adapt original reimplementation of Attention Rollout by https://github.com/jacob
 The main motivation is to see how following topics affects the Attention Map:
 - [ ] Representation vs Based Learning to pretrain model:
           - Based Learning:
+
+
+
+
                     - [ ] ????:
           - Representation Learning:
                     - [ ] Self-supervised Vision Transformer: https://github.com/Sara-Ahmed/SiT
