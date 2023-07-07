@@ -1,7 +1,7 @@
 # AttentionRollout ReImplementation
 Adapt original reimplementation of Attention Rollout by https://github.com/jacobgil/vit-explain.
 
-**Motivation: From visualizing Attention Map, the main motivation is to see ***how much impact*** each topic has on the way how the model pay attentions, its accuracy and computation time (Flop and GFlop are probably more universal computation cost measure in research but average user won't understand it so I prefer using the relative difference in computation time so average user can ***literally see*** the difference):**
+**Motivation: ***Isolate the impact of each following topic*** on how the model pay attentions, its accuracy and computation time (Flop and GFlop):**
 
 - Representation vs Based Learning to pretrain Vision Transformer (ViT):
      - [ ] Based Learning:
