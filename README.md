@@ -1,7 +1,7 @@
 # AttentionRollout ReImplementation
 Adapt original reimplementation of Attention Rollout by https://github.com/jacobgil/vit-explain.
 
-**Motivation: ***Isolate the impact of each following topic*** on how the model pay attentions, its accuracy and computation time (Flop and GFlop):**
+**Motivation: ***Isolate the impact of each following topic*** on how the model pay attentions, its accuracy and GPUtime (Flop and GFlop):**
 
 - Representation vs Based Learning to pretrain Vision Transformer (ViT):
      - [ ] Based Learning:
