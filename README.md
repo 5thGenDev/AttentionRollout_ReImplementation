@@ -1,2 +1,2 @@
 # AttentionRollout ReImplementation
-Reimplementation of Attention Rollout. Future work might experiment with SOTA ViT using Attention Rollout's successors
+Reimplementation of Attention Rollout. Future work will experiment with ViT backbone Video Diffusion using SOTA visualizer than Attention Rollout
