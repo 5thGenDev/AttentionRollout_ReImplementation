@@ -79,7 +79,7 @@ class Mlp(nn.Module):
         x = self.drop(x)
         return x
 
-# Actually Self Attention
+# Self Attention
 class Attention(nn.Module):
     def __init__(self, dim, num_heads=8, qkv_bias=False, qk_scale=None, attn_drop=0., proj_drop=0.):
         super().__init__()
@@ -129,27 +129,36 @@ class Block(nn.Module):
         return x
 
 
-### Hydra-head to replace Self-Attention and Multi-head Attention
-# d_model??? https://datascience.stackexchange.com/questions/93768/dimensions-of-transformer-dmodel-and-depth
+### Hydra-head to replace Soft-max(KV) portion in Self-Attention
+# Which influences Multi-head Attention as well
+# d_model = dim = feature_dim [https://datascience.stackexchange.com/questions/93768/dimensions-of-transformer-dmodel-and-depth]
 class HydraAttention(nn.Module):
-    def __init__(self, d_model, output_layer='linear', dropout=0.0):
+    def __init__(self, dim, output_layer='linear', dropout=0.0):
         super(HydraAttention, self).__init__()
-        self.d_model = d_model
-        self.qkv = nn.Linear(d_model, d_model * 3)
-        self.out = nn.Linear(d_model, d_model) if output_layer == 'linear' else nn.Identity()
+        self.d_model = dim
+        self.qkv = nn.Linear(dim, d_model * 3)
+        self.out = nn.Linear(dim, d_model) if output_layer == 'linear' else nn.Identity()
         self.dropout = nn.Dropout(dropout) 
 
     def forward(self, x, mask=None):
-        '''x: (B, T, D)'''
-        q, k, v = self.qkv(x).chunk(3, dim=-1)
+        '''x: (B, T, dim)'''
+         """
+            q, k, and v should all be tensors of shape
+            [batch, tokens, dim_features]
+        """
+        q, k, v = self.qkv(x).chunk(3, dim=-1) 
+
         q = q / q.norm(dim=-1, keepdim=True)
         k = k / k.norm(dim=-1, keepdim=True)
         if mask is not None:
             k = k.masked_fill(mask.unsqueeze(-1), 0)
-        kvw = k * v
+            
+        kv = k * v
+        #  kv = (k * v).sum(dim=-2), keepdim=True)
         if self.dropout.p > 0:
-            kvw = self.dropout(kvw.transpose(-1, -2)).transpose(-1, -2) # dropout in seq dimension 
-        out = kvw.sum(dim=-2, keepdim=True) * q
+            kv = self.dropout(kv.transpose(-1, -2)).transpose(-1, -2) # dropout in seq dimension 
+        out = kv.sum(dim=-2, keepdim=True) * q
+        # out = q * kv
         return self.out(out)
 
 
