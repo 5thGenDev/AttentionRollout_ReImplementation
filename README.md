@@ -1,8 +1,8 @@
 # AttentionRollout ReImplementation
 Adapt original reimplementation of Attention Rollout by https://github.com/jacobgil/vit-explain.
 
-Motivation: From visualizing Attention Map, the main motivation is to see how following topics affects the attention-layer:
-- Representation vs Based Learning to pretrain model:
+## Motivation: From visualizing Attention Map, the main motivation is to see how following topics affects the attention-layer: ##
+- Representation vs Based Learning to pretrain Vision Transformer (ViT):
      - [ ] Based Learning:
      - [ ] Self-supervised Vision Transformer 2021: https://github.com/Sara-Ahmed/SiT
            
@@ -21,3 +21,9 @@ Motivation: From visualizing Attention Map, the main motivation is to see how fo
      - [ ] ***VDT: An Empirical Study for Video Diffusion with Transformers***: https://github.com/RERV/VDT
      - [ ] *Masked Diffusion Transformer is a Strong Image Synthesizer*: https://github.com/sail-sg/MDT
      - [ ] Paper to read as baseline: Exploring Transformer Backbones for Image Diffusion Models
+
+
+## Tools to be used to visualize Attention Map ##
+- [ ] Attention Rollout
+- [ ] Gradient-based Attention Rollout
+- [ ] ????
