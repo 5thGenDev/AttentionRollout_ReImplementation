@@ -8,7 +8,7 @@ transforms_chain = transforms.Compose([
   transforms.Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225)), # Don't visualize img after applying normalize
 ])
 
-data = datasets.CIFAR10(
+data = datasets.Flowers102(
     root="data",
     transform=transforms_chain,
     download=True,
