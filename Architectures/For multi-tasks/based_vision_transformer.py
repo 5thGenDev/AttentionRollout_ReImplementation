@@ -77,7 +77,7 @@ class Mlp(nn.Module):
         return x
 
 
-# Multi-head Attention
+# Class Block = Multi-head Attention
 # For Hydra-Attention, set # Head (H) = # Token to get linear computation complexity
 class Block(nn.Module):
     def __init__(self, dim, num_heads, mlp_ratio=4., qkv_bias=False, qk_scale=None, drop=0., attn_drop=0.,
