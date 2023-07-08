@@ -1,5 +1,7 @@
-# d_model = token-embedding size
-# head_dim = token-embedding size for each head ONLY in the context of Scaling module
+'''
+d_model = token-embedding size
+head_dim = token-embedding size for each head ONLY in the context of Scaling module
+'''
 class SelfAttention(nn.Module):
     def __init__(self, d_model, num_heads=8, qkv_bias=False, qk_scale=None, attn_drop=0., proj_drop=0.):
         super().__init__()
@@ -26,7 +28,11 @@ class SelfAttention(nn.Module):
         x = self.proj_drop(x)
         return x, attn
 
-# Copied from https://github.com/robflynnyh/hydra-linear-attention/blob/main/hydra.py which is a reimplementation from Appendix C in https://arxiv.org/pdf/2209.07484.pdf
+
+'''
+Copied from https://github.com/robflynnyh/hydra-linear-attention/blob/main/hydra.py 
+The Git was reimplemented from Appendix C in https://arxiv.org/pdf/2209.07484.pdf
+'''
 class HydraAttention(nn.Module):
     def __init__(self, d_model, output_layer='linear', dropout=0.0):
         super(HydraAttention, self).__init__()
@@ -36,7 +42,11 @@ class HydraAttention(nn.Module):
         self.dropout = nn.Dropout(dropout) 
 
     def forward(self, x, mask=None):
-        '''x: (B, T, D)'''
+        """
+        q, k, and v should all be tensors of shape
+        [batch, tokens, features]
+        x: (B, T, D)
+        """
         q, k, v = self.qkv(x).chunk(3, dim=-1)
 
         # Tis cosine similarity kernel instead of softmax
