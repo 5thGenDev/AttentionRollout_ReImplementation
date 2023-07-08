@@ -1,5 +1,6 @@
 # AttentionRollout ReImplementation
 Adapt original reimplementation of Attention Rollout by https://github.com/jacobgil/vit-explain.
+Original paper for Attention Rollout: https://arxiv.org/pdf/2005.00928.pdf 
 
 **Motivation: ***Isolate the impact of each following topic*** on how the model pay attentions, its accuracy and GPUtime (Flop and GFlop):**
 
