@@ -14,7 +14,13 @@ data = datasets.Flowers102(
     download=True,
 )
 
-
+# For visualize some img from dataset
+'''
+from torchvision import utils
+import torchvision.transforms.functional as tfF
+imgs = torch.stack([data[i][0] for i in range(8)])
+tfF.to_pil_image(utils.make_grid(imgs,))
+'''
 
 train_dl = torch.utils.data.DataLoader(data,64,shuffle=True,num_workers=8,pin_memory=True)
 
