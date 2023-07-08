@@ -45,8 +45,8 @@ class HydraAttention(nn.Module):
         
         if mask is not None:
             k = k.masked_fill(mask.unsqueeze(-1), 0)
-        kvw = k * v
+        kv = k * v
         if self.dropout.p > 0:
-            kvw = self.dropout(kvw.transpose(-1, -2)).transpose(-1, -2) # dropout in seq dimension 
-        out = kvw.sum(dim=-2, keepdim=True) * q
+            kv = self.dropout(kv.transpose(-1, -2)).transpose(-1, -2) # dropout in seq dimension 
+        out = kv.sum(dim=-2, keepdim=True) * q
         return self.out(out)
