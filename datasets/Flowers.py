@@ -1,14 +1,19 @@
-import PIL
-from torchvision import transforms as tf
+import torch
+from torchvision import datasets, transforms
 
-# now load a train set and a validation set
+transforms_chain = transforms.Compose([
+  transforms.Resize(size=256, interpolation=3),
+  transforms.CenterCrop(size=224),
+  transforms.ToTensor(),
+  transforms.Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225)), # Don't visualize img after applying normalize
+])
 
-
-data = datasets.Flowers102(
-  "data",
-  transform=build_transform(True,224),
-  download=True, 
+data = datasets.CIFAR10(
+    root="data",
+    transform=transforms_chain,
+    download=True,
 )
+
 
 
 train_dl = torch.utils.data.DataLoader(data,64,shuffle=True,num_workers=8,pin_memory=True)
