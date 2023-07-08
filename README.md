@@ -25,7 +25,7 @@ Adapt original reimplementation of Attention Rollout by https://github.com/jacob
      - [ ] Paper to read as baseline: Exploring Transformer Backbones for Image Diffusion Models
 
 
-## Tools to be used to visualize Attention Map ##
+## Other tools to use other than Attention Rollout ##
 - [ ] Attention Rollout
 - [ ] Gradient-based Attention Rollout
 - [ ] ????
