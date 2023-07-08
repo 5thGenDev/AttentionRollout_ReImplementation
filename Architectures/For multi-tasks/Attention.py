@@ -26,7 +26,7 @@ class SelfAttention(nn.Module):
         x = self.proj_drop(x)
         return x, attn
 
-# Copied from https://github.com/robflynnyh/hydra-linear-attention/blob/main/hydra.py
+# Copied from https://github.com/robflynnyh/hydra-linear-attention/blob/main/hydra.py which is a reimplementation from Appendix C in https://arxiv.org/pdf/2209.07484.pdf
 class HydraAttention(nn.Module):
     def __init__(self, d_model, output_layer='linear', dropout=0.0):
         super(HydraAttention, self).__init__()
@@ -45,8 +45,11 @@ class HydraAttention(nn.Module):
         
         if mask is not None:
             k = k.masked_fill(mask.unsqueeze(-1), 0)
+
+        # Basically kv -> q*kv but taking into account of dropout
         kv = k * v
         if self.dropout.p > 0:
             kv = self.dropout(kv.transpose(-1, -2)).transpose(-1, -2) # dropout in seq dimension 
         out = kv.sum(dim=-2, keepdim=True) * q
+        
         return self.out(out)
