@@ -13,7 +13,8 @@ Original paper for Attention Rollout: https://arxiv.org/pdf/2005.00928.pdf
 
 - Different Attention-layer in ViT:
      - [ ] Hydra Attention: Hydra Attention: Efficient Attention with Many Heads: https://arxiv.org/abs/2209.07484 
-     - [ ] Accurate Image Restoration with Attention Retractable Transformer: https://github.com/gladzhang/ART
+     - [ ] (Dense+Sparse) Attention = Attention Retractable Transformer for accurate image restoration: https://github.com/gladzhang/ART - The proposed model is innovative. It combines dense and sparse attention modules. The proposed sparse attention can allow token interactions in sparse image regions and thus enlarge the receptive field of the module. The combination of sparse and dense modules **allows for global and local interactions while being tractable**.
+          
 
 - U-Net backbone for Diffusion Model:
      - [ ] Art style diffusion: https://github.com/ChenDarYen/ArtFusion
