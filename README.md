@@ -9,7 +9,8 @@ Original paper for Attention Rollout: https://arxiv.org/pdf/2005.00928.pdf
            
 - Different optimizers:
      - [ ] SAM: https://github.com/davda54/sam
-     - [ ] ASAM: https://github.com/SamsungLabs/ASAM
+     - [ ] Adaptive policy SAM: https://github.com/SamsungLabs/ASAM
+     - [ ] Sparse SAM: https://github.com/Mi-Peng/Sparse-Sharpness-Aware-Minimization
 
 - Different Attention-layer in ViT:
      - [ ] Hydra Attention (num_heads=embed_dim=768) to reduce computation while keeping competitive accuracys: https://arxiv.org/abs/2209.07484, (ReImp): https://github.com/robflynnyh/hydra-linear-attention 
