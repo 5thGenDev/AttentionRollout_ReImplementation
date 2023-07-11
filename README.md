@@ -4,8 +4,7 @@ Original paper for Attention Rollout: https://arxiv.org/pdf/2005.00928.pdf
 
 **Motivation: ***Isolate the impact of each following topic*** on how the model pay attentions, its accuracy and GPUtime (Flop and GFlop):**
 
-- Representation vs Based Learning to pretrain Vision Transformer (ViT):
-     - [ ] Based Learning:
+- Representation Learning ViT:
      - [ ] Self-supervised Vision Transformer 2021: https://github.com/Sara-Ahmed/SiT
            
 - Latest optimizers:
