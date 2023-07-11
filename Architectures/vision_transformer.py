@@ -9,7 +9,7 @@ import torch
 import torch.nn as nn
 
 import warnings
-from .Attention import SelfAttention
+from .Attention import SelfAttention, HydraAttention
 
 def _no_grad_trunc_normal_(tensor, mean, std, a, b):
     def norm_cdf(x):
