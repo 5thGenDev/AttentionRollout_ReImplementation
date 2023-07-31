@@ -1,6 +1,6 @@
 # AttentionRollout ReImplementation
-Original paper for Attention Rollout: https://arxiv.org/pdf/2005.00928.pdf 
-Motivation: Isolate the impact of each attention block in ViT for image classification task in term of its accuracy
+- Original paper: https://arxiv.org/pdf/2005.00928.pdf. 
+- Motivation: Isolate the impact of each attention block in ViT for image classification task in term of its accuracy
 
      
 ## Different Attention-layer in ViT:
