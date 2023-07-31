@@ -2,11 +2,9 @@
 Adapt original reimplementation of Attention Rollout by https://github.com/jacobgil/vit-explain.
 Original paper for Attention Rollout: https://arxiv.org/pdf/2005.00928.pdf 
 
-**Motivation: ***Isolate the impact of each following topic*** on how the model pay attentions, its accuracy and GPUtime (Flop and GFlop):**
+**Motivation: ***Isolate the impact of each following topic*** on how ViT attends in image classification task, its accuracy and GPUtime (Flop and GFlop):**
 
-- Representation Learning ViT:
-     - [ ] Self-supervised Vision Transformer 2021: https://github.com/Sara-Ahmed/SiT
-           
+        
 - Different optimizers:
      - [ ] SAM: https://github.com/davda54/sam
      - [ ] Adaptive policy SAM: https://github.com/SamsungLabs/ASAM
