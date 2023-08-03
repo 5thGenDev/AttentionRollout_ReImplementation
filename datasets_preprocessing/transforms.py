@@ -124,8 +124,7 @@ class ColorAugmentation:
 
 
 def build_transforms(
-    height,
-    width,
+    input_size
     random_erase=False,  # use random erasing for data augmentation
     color_jitter=False,  # randomly change the brightness, contrast and saturation
     color_aug=False,  # randomly alter the intensities of RGB channels
@@ -136,30 +135,35 @@ def build_transforms(
     imagenet_mean = [0.485, 0.456, 0.406]
     imagenet_std = [0.229, 0.224, 0.225]
     normalize = T.Normalize(mean=imagenet_mean, std=imagenet_std)
+    height, width = input_size
 
     # build train transformations
-    transform_train = []
-    transform_train += [Random2DTranslation(height, width)]
-    transform_train += [T.RandomHorizontalFlip()]
-    if color_jitter:
-        transform_train += [
-            T.ColorJitter(brightness=0.2, contrast=0.15, saturation=0, hue=0)
-        ]
-    transform_train += [T.ToTensor()]
-    if color_aug:
-        transform_train += [ColorAugmentation()]
-    transform_train += [normalize]
-    if random_erase:
-        transform_train += [RandomErasing()]
-    transform_train = T.Compose(transform_train)
+    transform = []
+    if is_train:
+        transform += [Random2DTranslation(height, width)]
+        transform += [T.RandomResizedCrop(input_size, scale=(0.2, 1.0), interpolation=3)]  # 3 is bicubic
+        transform += [T.RandomHorizontalFlip()]
+        if color_jitter:
+            transform += [
+                T.ColorJitter(brightness=0.2, contrast=0.15, saturation=0, hue=0)
+            ]
+        transform += [T.ToTensor()]
+        if color_aug:
+            transform += [ColorAugmentation()]
+        transform += [normalize]
+        if random_erase:
+            transform += [RandomErasing()]
+        return T.Compose(transform)
 
     # build test transformations
-    transform_test = T.Compose(
-        [
-            T.Resize((height, width)),
-            T.ToTensor(),
-            normalize,
-        ]
-    )
-
-    return transform_train, transform_test
+    if input_size <= 224:
+        crop_pct = 224 / 256
+    else:
+        crop_pct = 1.0
+    
+    size = int(input_size / crop_pct)
+    transform += [T.Resize(size, interpolation=PIL.Image.BICUBIC)]  # to maintain same ratio w.r.t. 224 images
+    transform += [T.CenterCrop(input_size)]
+    transform += [T.ToTensor()]
+    transform += [normalize]
+    return T.Compose(transform)
