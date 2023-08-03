@@ -1,6 +1,6 @@
 '''
-d_model = token-embedding size
-head_dim = token-embedding size for each head ONLY in the context of Scaling module
+d_model = number of tokens in total (512 for original paper)
+head_dim = number of token for each attention head 
 '''
 class SelfAttention(nn.Module):
     def __init__(self, d_model, num_heads=8, qkv_bias=False, qk_scale=None, attn_drop=0., proj_drop=0.):
