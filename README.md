@@ -4,7 +4,7 @@
 
      
 ## Other Attention in ViT:
-- [x] [Hydra Attention](https://arxiv.org/abs/2209.07484) (num_heads=embed_dim=768):  linear complexity while keeping competitive accuracys. Reimplemented by  https://github.com/robflynnyh/hydra-linear-attention/blob/main/hydra.py 
+- [x] [Hydra Attention](https://arxiv.org/abs/2209.07484) argues for having num_heads=embed_dim=768 to get linear complexity while keeping competitive accuracy. Reimplemented by  https://github.com/robflynnyh/hydra-linear-attention/blob/main/hydra.py 
 - [ ] Dilated-Self Attention used for LongNet: Also linear complexity. Reimplemented by https://github.com/alexisrozhkov/dilated-self-attention  
           
 ## Other than Attention Rollout
