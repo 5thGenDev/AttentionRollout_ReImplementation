@@ -4,7 +4,7 @@
 
      
 ## Other Attention in ViT:
-- [x] Hydra Attention (num_heads=embed_dim=768) to reduce computation while keeping competitive accuracys: https://arxiv.org/abs/2209.07484
+- [x] Hydra Attention (num_heads=embed_dim=768) = linear complexity while keeping competitive accuracys: https://arxiv.org/abs/2209.07484
 - [ ] Dilated-Self Attention used for LongNet: Reimplemented by https://github.com/alexisrozhkov/dilated-self-attention  
           
 ## Other than Attention Rollout
