@@ -130,23 +130,18 @@ def build_transforms(
     color_aug=False,  # randomly alter the intensities of RGB channels
     **kwargs
 ):
-    # use imagenet mean and std as default
-    # TODO: compute dataset-specific mean and std
     imagenet_mean = [0.485, 0.456, 0.406]
     imagenet_std = [0.229, 0.224, 0.225]
     normalize = T.Normalize(mean=imagenet_mean, std=imagenet_std)
-    height, width = input_size
 
-    # build train transformations
+    # train transforms
     transform = []
     if is_train:
-        transform += [Random2DTranslation(height, width)]
+        transform += [Random2DTranslation(input_size, input_size)]
         transform += [T.RandomResizedCrop(input_size, scale=(0.2, 1.0), interpolation=3)]  # 3 is bicubic
         transform += [T.RandomHorizontalFlip()]
         if color_jitter:
-            transform += [
-                T.ColorJitter(brightness=0.2, contrast=0.15, saturation=0, hue=0)
-            ]
+            transform += [T.ColorJitter(brightness=0.2, contrast=0.15, saturation=0, hue=0)]
         transform += [T.ToTensor()]
         if color_aug:
             transform += [ColorAugmentation()]
@@ -155,7 +150,7 @@ def build_transforms(
             transform += [RandomErasing()]
         return T.Compose(transform)
 
-    # build test transformations
+    # eval transforms
     if input_size <= 224:
         crop_pct = 224 / 256
     else:
