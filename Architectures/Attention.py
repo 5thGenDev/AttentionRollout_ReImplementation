@@ -31,7 +31,7 @@ class SelfAttention(nn.Module):
 
 '''
 Copied from https://github.com/robflynnyh/hydra-linear-attention/blob/main/hydra.py 
-The Git was reimplemented from Appendix C in https://arxiv.org/pdf/2209.07484.pdf
+His code reimplemented from Appendix C in https://arxiv.org/pdf/2209.07484.pdf
 '''
 class HydraAttention(nn.Module):
     def __init__(self, d_model, output_layer='linear', dropout=0.0):
