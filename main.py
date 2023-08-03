@@ -24,16 +24,6 @@ def main():
     state = {k.replace("module.backbone.",""):v for k,v in state['teacher'].items()} # extract the model weights!
     print("Loading weights: ", model.load_state_dict(state,strict=False))
 
-    num_epoch = 10
-    log=[]
-    for epoch in range(num_epoch):
-        train_one_epoch(train_dl,model, optimizer, device)
-        if epoch%2==0:
-            pred,y = eval_one_epoch(val_dl,model, device)
-            acc = (pred==y).float().mean().item()
-            log.append(acc)
-    
-            print(epoch, acc)
 
 if __name__ == "__main__":
   main()
