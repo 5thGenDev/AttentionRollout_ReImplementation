@@ -1,3 +1,5 @@
+import tqdm
+
 def train_one_epoch(dl,model, opt, device):
     model.train()
     pbar = tqdm.tqdm(dl)
