@@ -29,7 +29,7 @@ def eval_one_epoch(dl,model, device):
     pred, y = list(zip(*out))
     return torch.cat(pred),torch.cat(y)
 
-
+# num_epoch = 800 for fair comparison against pretrained SiT 
 def train(num_epoch):
     log=[]
     for epoch in range(num_epoch):
