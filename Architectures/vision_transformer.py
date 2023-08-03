@@ -1,7 +1,3 @@
-"""
-d_model = token/word-vector-embedding size
-"""
-
 import math
 from functools import partial
 
@@ -79,10 +75,10 @@ class Mlp(nn.Module):
 
 
 """
-Class Block = Multi-head Attention
+Class Block = Multihead-SelfAttention
 copied from https://github.com/Sara-Ahmed/SiT/blob/main/vision_transformer.py 
 
-If use Multi-head HydraAttention, set # Head (H) = # Token to get linear computation complexity
+If use Multihead-HydraAttention, num_heads = d_model (# Tokens) to get linear computation complexity
 """
 class Block(nn.Module):
     def __init__(self, d_model, num_heads, mlp_ratio=4., qkv_bias=False, qk_scale=None, drop=0., attn_drop=0.,
