@@ -138,6 +138,7 @@ class VisionTransformer(nn.Module):
             Block(d_model=embed_dim, num_heads=num_heads, mlp_ratio=mlp_ratio, qkv_bias=qkv_bias, qk_scale=qk_scale, 
                   drop=drop_rate, attn_drop=attn_drop_rate, drop_path=dpr[i], norm_layer=norm_layer)
             for i in range(depth)])
+        # If use HydraAttention, create 10 Encoder blocks of Self Attention, and 2 Encoder blocks of Hydra Attention
         self.norm = norm_layer(embed_dim)
 
         # Classifier head
