@@ -5,7 +5,7 @@ import torch
 import torch.nn as nn
 
 import warnings
-from Architectures.Attention import SelfAttention, HydraAttention
+from Architectures.Multihead-Attention import SelfAttention, HydraAttention
 
 def _no_grad_trunc_normal_(tensor, mean, std, a, b):
     def norm_cdf(x):
