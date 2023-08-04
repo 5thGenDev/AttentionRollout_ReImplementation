@@ -77,8 +77,6 @@ class Mlp(nn.Module):
 """
 Class Block = Encoder block
 copied from https://github.com/Sara-Ahmed/SiT/blob/main/vision_transformer.py 
-
-If use Multihead-HydraAttention, num_heads = d_model (# Tokens) to get linear computation complexity
 """
 class Block(nn.Module):
     def __init__(self, d_model, num_heads, mlp_ratio=4., qkv_bias=False, qk_scale=None, drop=0., attn_drop=0.,
