@@ -130,6 +130,7 @@ class VisionTransformer(nn.Module):
         self.pos_embed = nn.Parameter(torch.zeros(1, num_patches + 1, embed_dim))
         self.pos_drop = nn.Dropout(p=drop_rate)
 
+        # this line is irrelevant as it says linspace(0, 0, depth) so drop_rate is 0 throughout
         dpr = [x.item() for x in torch.linspace(0, drop_path_rate, depth)]
 
         # Basically create 12 encoder blocks as depth=12
