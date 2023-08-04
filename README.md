@@ -2,6 +2,7 @@
 - Original paper: https://arxiv.org/pdf/2005.00928.pdf. 
 - Motivation: Visualize each type of attention block and isolate their impact to image classification accuracy for ViT model.
 
+***Pretrain 800 epochs on small dataset vs finetuning upto 100 epoch on the same dataset using pretrained SiT***
      
 ## Other Attention in ViT:
 Note that d_model = embed_dim already where d_model = number of tokens, head_dim = d_model/num_heads
