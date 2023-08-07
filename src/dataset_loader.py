@@ -4,7 +4,7 @@ import os.path as osp
 
 import PIL
 from torchvision import datasets
-from preprocessing.transforms import build_transforms
+from src.multimodal_transform import 
 
 def read_image(img_path):
     """Keep reading image until succeed.
