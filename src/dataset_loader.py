@@ -4,7 +4,7 @@ import os.path as osp
 
 import PIL
 from torchvision import datasets
-from src.multimodal_transform import 
+from src.multimodal_transform import Fuse_RGB_Gray_Sketch
 
 def read_image(img_path):
     """Keep reading image until succeed.
