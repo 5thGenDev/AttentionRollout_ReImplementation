@@ -14,6 +14,7 @@ def read_image(img_path):
         raise OSError(f"{img_path} does not exist")
     while not got_img:
         try:
+            # Image.open(img_path) return PIL image
             img = Fuse_RGB_Gray_Sketch(Image.open(img_path))
             got_img = True
         except OSError:
