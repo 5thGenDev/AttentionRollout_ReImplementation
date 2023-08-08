@@ -2,18 +2,22 @@
 
 import os
 import sys
+from torchvision import datasets as D
 
-from datasets.Pets import pets
 
 def build_dataset(args, is_train, trnsfrm=None, training_mode='finetune'):
     if args.data_set == 'Pets':
+        folder = 'OxfordIIIPet'
         split = 'trainval' if is_train else 'test'
-        dataset = pets(os.path.join(args.data_location, 'Pets_dataset'), split=split, transform=trnsfrm)
+        root = os.path.join(args.data_location, folder)
+        dataset = D.Flowers102(root=root, download=True,)
         nb_classes = 37
 
     if agrs.data_set == 'Flowers':
+        folder = 'Oxford102Flowers'
         split = 'train' if is_train else 'test'
-        dataset = flowers(os.path.join(args.data_location, 'Flowers_dataset'), split=split, transform=trnsfrm)
+        root = os.path.join(args.data_location, folder)
+        dataset = D.Flowers102(root=root, download=True,)
         nb_classes = 102
     
     else:
