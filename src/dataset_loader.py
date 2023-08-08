@@ -8,7 +8,7 @@ from src.multimodal_transform import Fuse_RGB_Gray_Sketch
 
 # img = Fuse_RGB_Gray_SKetch(PIL_image) 
 '''
-training_data = datasets.FashionMNIST(
+data = datasets.FashionMNIST(
     root="data",
     train=True,
     download=True,
