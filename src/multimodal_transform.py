@@ -98,4 +98,23 @@ class Fuse_RGB_Gray_Sketch(object):
             return img
 
 
-
+def build_test_transform(input_size):
+    # IMAGENET_DEFAULT_MEAN = (0.485, 0.456, 0.406)
+    # IMAGENET_DEFAULT_STD = (0.229, 0.224, 0.225)
+    mean = (0.485, 0.456, 0.406)
+    std = (0.229, 0.224, 0.225)
+    
+    # eval transform
+    t = []
+    if input_size <= 224:
+        crop_pct = 224 / 256
+    else:
+        crop_pct = 1.0
+    size = int(input_size / crop_pct)
+    t.append(
+        transforms.Resize(size, interpolation=PIL.Image.BICUBIC),  # to maintain same ratio w.r.t. 224 images
+    )
+    t.append(transforms.CenterCrop(input_size))
+    t.append(transforms.ToTensor())
+    t.append(transforms.Normalize(mean, std))
+    return transforms.Compose(t)
