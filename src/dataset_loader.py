@@ -6,6 +6,19 @@ from PIL import Image
 from torchvision import datasets
 from src.multimodal_transform import Fuse_RGB_Gray_Sketch
 
+# img = Fuse_RGB_Gray_SKetch(PIL_image) 
+'''
+training_data = datasets.FashionMNIST(
+    root="data",
+    train=True,
+    download=True,
+    transform=ToTensor()
+)
+X, label = training_data[sample_idx]
+matplotlib.pyplot.imshow(X, cmap="gray") where X = PIL_image
+'''
+
+
 def read_image(img_path):
     """Keep reading image until succeed.
     This can avoid IOError incurred by heavy IO process."""
