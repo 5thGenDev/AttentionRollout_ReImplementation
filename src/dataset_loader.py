@@ -18,43 +18,6 @@ X, label = training_data[sample_idx]
 matplotlib.pyplot.imshow(X, cmap="gray") where X = PIL_image
 '''
 
-
-def read_image(img_path):
-    """Keep reading image until succeed.
-    This can avoid IOError incurred by heavy IO process."""
-    got_img = False
-    if not osp.exists(img_path):
-        raise OSError(f"{img_path} does not exist")
-    while not got_img:
-        try:
-            # img = Image.open(img_path) returns PIL image to img variable
-            # img = Fuse_RGB_Gray_SKetch(img)
-            img = Fuse_RGB_Gray_Sketch(Image.open(img_path))
-            got_img = True
-        except OSError:
-            print(
-                f'IOError incurred when reading "{img_path}". Will redo. Don\'t worry. Just chill.'
-            )
-            pass
-    return img
-
-
-class ImageDataset(Dataset):
-    """Image Person ReID Dataset"""
-
-    def __init__(self, dataset):
-        self.dataset = dataset
-
-    def __len__(self):
-        return len(self.dataset)
-
-    def __getitem__(self, index):
-        img_path, pid, camid = self.dataset[index]
-        img = read_image(img_path)
-        return img, pid, camid, img_path
-
-
-
 # now load a train set and a validation set
 def load_dataset(
     dataset_name, 
