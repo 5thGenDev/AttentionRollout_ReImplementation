@@ -23,12 +23,12 @@ def args_parser():
     parser.add_argument('--weight_decay_end', type=float, default=0.1)
     parser.add_argument('--clip_grad', type=float, default=3.0)
     
-    parser.add_argument('--batch_size', default=32, type=int)
+    parser.add_argument('--batch_size', default=128, type=int)
     parser.add_argument('--epochs', default=800, type=int, help='Number of epochs of training.')
 
-    parser.add_argument("--lr", default=0.0005, type=float, help="Learning rate.")
-    parser.add_argument("--warmup_epochs", default=10, type=int, help="Number of epochs for the linear learning-rate warm up.")
-    parser.add_argument('--min_lr', type=float, default=1e-6, help="Target LR at the end of optimization.")
+    parser.add_argument("--lr", default=0.5, type=float, help="Learning rate for SequentialLR. Current Pytorch SOTA")
+    parser.add_argument("--warmup_epochs", default=5, type=int, help="Number of epochs for SequentialLR warm up.")
+    parser.add_argument('--min_lr', type=float, default=1e-6, help="minLR for SequentialLR.")
 
   
     # Dataset
