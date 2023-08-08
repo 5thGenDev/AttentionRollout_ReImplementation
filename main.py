@@ -47,12 +47,10 @@ def train_SiT(args):
     cudnn.benchmark = True
 
     # prepare dataset
-    transform = datasets_utils.DataAugmentationSiT(args)
-    
-    if args.data_set == 'ImageNet':
-        dataset = torchvision.datasets.ImageFolder(args.data_location, transform=transform)
-    else:
-        dataset, _ = load_dataset.build_dataset(args, True, trnsfrm=transform, training_mode = 'SSL')
+    # transform = datasets_utils.DataAugmentationSiT(args)
+
+    # Need to fix this 
+    dataset, _ = load_dataset.build_dataset(args, True, trnsfrm=transform, training_mode = 'SSL')
     
     sampler = torch.utils.data.DistributedSampler(dataset, shuffle=True)
     data_loader = torch.utils.data.DataLoader(dataset,
