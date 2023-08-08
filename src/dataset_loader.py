@@ -21,7 +21,6 @@ matplotlib.pyplot.imshow(X, cmap="gray") where X = PIL_image
 # now load a train set and a validation set
 def load_dataset(
     dataset_name, 
-    root="data"
 ):
     match dataset_name:
         case "CIFAR10":
