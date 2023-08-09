@@ -111,7 +111,7 @@ def train_SiT(args):
     # momentum parameter is increased to 1. during training with a cosine schedule
     momentum_schedule = cosine_scheduler(args.momentum_teacher, 1, args.epochs, len(data_loader))
 
-    # Resume training 
+    # Resume training or finetuning?
     to_restore = {"epoch": 0}
     utils.restart_from_checkpoint(
         os.path.join(args.output_dir, "checkpoint.pth"),
