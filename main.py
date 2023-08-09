@@ -16,6 +16,7 @@ import torch.nn.functional as F
 
 #from datasets import load_dataset, datasets_utils
 from src.dataset_loader import build_dataset
+from src.preprocessing import DataAugmentationSiT
 from args import get_args_parser
 
 import utils
@@ -55,7 +56,7 @@ def train_SiT(args):
 
     # prepare dataset
     # Finetuned dataset has to be preprocessed exactly as pretrained dataset
-    transform = datasets_utils.DataAugmentationSiT(args)
+    transform = DataAugmentationSiT(args)
 
     # Need to fix this 
     dataset, _ = build_dataset(args, True, trnsfrm=transform, training_mode = 'SSL')
