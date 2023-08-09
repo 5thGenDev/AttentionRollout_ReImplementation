@@ -19,6 +19,9 @@ from src.dataset_loader import build_dataset
 from src.preprocessing import DataAugmentationSiT, GMML_replace_list
 from args import get_args_parser
 
+# schedulers
+from src.schedulers import sequentialLR, cosine_scheduler
+
 import utils
 from Architectures import SiT as vits
 from Architectures.SiT import CLSHead, RECHead
@@ -102,7 +105,7 @@ def train_SiT(args):
         args.lr * (args.batch_size * utils.get_world_size()) / 256., 
         args.min_lr, args.epochs, len(data_loader), warmup_epochs=args.warmup_epochs)
     
-    wd_schedule = utils.cosine_scheduler( args.weight_decay,
+    wd_schedule = utils.cosine_scheduler(args.weight_decay,
         args.weight_decay_end, args.epochs, len(data_loader))
     
     # momentum parameter is increased to 1. during training with a cosine schedule
