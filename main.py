@@ -16,7 +16,7 @@ import torch.nn.functional as F
 
 #from datasets import load_dataset, datasets_utils
 from src.dataset_loader import build_dataset
-from src.preprocessing import DataAugmentationSiT
+from src.preprocessing import DataAugmentationSiT, GMML_replace_list
 from args import get_args_parser
 
 import utils
@@ -40,11 +40,10 @@ class collate_batch(object):
         batch = torch.utils.data.dataloader.default_collate(batch)
         
         if self.drop_replace > 0:
-            batch[0][1][0], batch[0][2][0] = datasets_utils.GMML_replace_list(batch[0][0][0], batch[0][1][0], batch[0][2][0],
-                                                                            max_replace=self.drop_replace, align=self.drop_align)
-            batch[0][1][1], batch[0][2][1] = datasets_utils.GMML_replace_list(batch[0][0][1], batch[0][1][1], batch[0][2][1],
-                                                                            max_replace=self.drop_replace, align=self.drop_align)
-        
+            batch[0][1][0], batch[0][2][0] = GMML_replace_list(batch[0][0][0], batch[0][1][0], batch[0][2][0], 
+                                                               max_replace=self.drop_replace, align=self.drop_align)
+            batch[0][1][1], batch[0][2][1] = GMML_replace_list(batch[0][0][1], batch[0][1][1], batch[0][2][1], 
+                                                               max_replace=self.drop_replace, align=self.drop_align)
         return batch
     
     
