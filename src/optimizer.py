@@ -4,7 +4,7 @@ import torch
 import torch.nn as nn
 
 
-def init_optimizer(
+def employ_optimizer(
     model,
     optim="adam",  # optimizer choices
     lr=0.003,  # learning rate
@@ -19,31 +19,6 @@ def init_optimizer(
     new_layers=None,  # new layers use the default lr, while other layers's lr is scaled by base_lr_mult
     base_lr_mult=0.1,  # learning rate multiplier for base layers
 ):
-    if staged_lr:
-        assert new_layers is not None
-        base_params = []
-        base_layers = []
-        new_params = []
-        if isinstance(model, nn.DataParallel):
-            model = model.module
-        for name, module in model.named_children():
-            if name in new_layers:
-                new_params += [p for p in module.parameters()]
-            else:
-                base_params += [p for p in module.parameters()]
-                base_layers.append(name)
-        param_groups = [
-            {"params": base_params, "lr": lr * base_lr_mult},
-            {"params": new_params},
-        ]
-        print("Use staged learning rate")
-        print(
-            "* Base layers (initial lr = {}): {}".format(lr * base_lr_mult, base_layers)
-        )
-        print(f"* New layers (initial lr = {lr}): {new_layers}")
-    else:
-        param_groups = model.parameters()
-
     # Construct optimizer
     if optim == "adam":
         return torch.optim.Adam(
