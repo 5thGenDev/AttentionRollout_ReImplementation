@@ -101,15 +101,15 @@ def train_SiT(args):
     fp16_scaler = torch.cuda.amp.GradScaler() if args.use_fp16 else None
 
     # init schedulers 
-    lr_schedule = utils.cosine_scheduler(
+    lr_schedule = cosine_scheduler(
         args.lr * (args.batch_size * utils.get_world_size()) / 256., 
         args.min_lr, args.epochs, len(data_loader), warmup_epochs=args.warmup_epochs)
     
-    wd_schedule = utils.cosine_scheduler(args.weight_decay,
+    wd_schedule = cosine_scheduler(args.weight_decay,
         args.weight_decay_end, args.epochs, len(data_loader))
     
     # momentum parameter is increased to 1. during training with a cosine schedule
-    momentum_schedule = utils.cosine_scheduler(args.momentum_teacher, 1, args.epochs, len(data_loader))
+    momentum_schedule = cosine_scheduler(args.momentum_teacher, 1, args.epochs, len(data_loader))
 
     # Resume training 
     to_restore = {"epoch": 0}
