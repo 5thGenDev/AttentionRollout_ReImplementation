@@ -293,5 +293,4 @@ class RECHead(nn.Module):
         out_sz = tuple( (  int(math.sqrt(x_rec.size()[2]))  ,   int(math.sqrt(x_rec.size()[2])) ) )
         x_rec = self.convTrans(x_rec.unflatten(2, out_sz))
                 
-                
         return x_rec
