@@ -14,7 +14,9 @@ import torch.nn as nn
 import torch.backends.cudnn as cudnn
 import torch.nn.functional as F
 
-from datasets import load_dataset, datasets_utils
+#from datasets import load_dataset, datasets_utils
+from src.dataset_loader import build_dataset
+from args import
 
 import utils
 import vision_transformer as vits
@@ -50,7 +52,7 @@ def train_SiT(args):
     # transform = datasets_utils.DataAugmentationSiT(args)
 
     # Need to fix this 
-    dataset, _ = load_dataset.build_dataset(args, True, trnsfrm=transform, training_mode = 'SSL')
+    dataset, _ = build_dataset(args, True, trnsfrm=transform, training_mode = 'SSL')
     
     sampler = torch.utils.data.DistributedSampler(dataset, shuffle=True)
     data_loader = torch.utils.data.DataLoader(dataset,
