@@ -1,7 +1,7 @@
 # Copyright (c) EEEM071, University of Surrey
 
 import torch
-
+import numpy 
 
 def sequentialLR(
     optimizer,
@@ -26,8 +26,22 @@ def sequentialLR(
     main_lr_scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(
         optimizer, T_max=epochs - lr_warmup_epochs, eta_min=min_lr
     )
-    
+
+    # This is the schedule
     return torch.optim.lr_scheduler.SequentialLR(
         optimizer, schedulers=[warmup_lr_scheduler, main_lr_scheduler], milestones=[warmup_epochs]
     )
 
+
+def cosine_scheduler(base_value, final_value, epochs, niter_per_ep, warmup_epochs=0, start_warmup_value=0):
+    warmup_schedule = np.array([])
+    warmup_iters = warmup_epochs * niter_per_ep
+    if warmup_epochs > 0:
+        warmup_schedule = np.linspace(start_warmup_value, base_value, warmup_iters)
+
+    iters = np.arange(epochs * niter_per_ep - warmup_iters)
+    schedule = final_value + 0.5 * (base_value - final_value) * (1 + np.cos(np.pi * iters / len(iters)))
+
+    schedule = np.concatenate((warmup_schedule, schedule))
+    assert len(schedule) == epochs * niter_per_ep
+    return schedule
