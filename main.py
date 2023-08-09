@@ -25,11 +25,6 @@ from Architectures.SiT import CLSHead, RECHead
 import torchvision
 
 
-# Global vars
-parser = get_args_parser()
-args = parser.parse_args()
-
-
 # replace from other images
 class collate_batch(object): 
     def __init__(self, drop_replace=0., drop_align=1):
@@ -53,10 +48,14 @@ def train_SiT(args):
     print("git:\n  {}\n".format(utils.get_sha()))
     cudnn.benchmark = True
 
-    # prepare dataset
-    # Finetuned dataset should be preprocessed like pretrained dataset
+    # Prepare dataset preprocessing
+    ## Pretrained dataset can be preprocessed whatever.
+    ## Finetuned dataset should be preprocessed like pretrained dataset
     transform = DataAugmentationSiT(args)
-    dataset, _ = build_dataset(args, True, trnsfrm=transform, training_mode = 'SSL')
+    if args.data_set == 'ImageNet':
+        dataset = torchvision.datasets.ImageFolder(args.data_location, transform=transform)
+    else:
+        dataset, _ = build_dataset(args, True, trnsfrm=transform)
     
     sampler = torch.utils.data.DistributedSampler(dataset, shuffle=True)
     data_loader = torch.utils.data.DataLoader(dataset,
@@ -301,5 +300,7 @@ class FullPipline(nn.Module):
 
 
 if __name__ == '__main__':
+    parser = get_args_parser()
+    args = parser.parse_args()
     Path(args.output_dir).mkdir(parents=True, exist_ok=True)
     train_SiT(args)
