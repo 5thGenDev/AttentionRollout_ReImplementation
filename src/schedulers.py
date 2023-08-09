@@ -3,7 +3,7 @@
 import torch
 
 
-def sequential(
+def sequentialLR(
     optimizer,
     epochs,
     warmup_epochs=5,
