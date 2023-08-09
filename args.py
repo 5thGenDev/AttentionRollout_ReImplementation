@@ -12,6 +12,8 @@ def args_parser():
     parser.add_argument('--drop_align', type=int, default=1, help='Align drop with patches; Set to patch size to align corruption with patches')
     parser.add_argument('--drop_type', type=str, default='zeros', help='Drop Type.')
     
+    parser.add_argument('--lmbda', type=int, default=1, help='Scaling factor for the reconstruction loss')
+    
     # Model parameters
     parser.add_argument('--model', default='vit_small', type=str, choices=['vit_tiny', 'vit_small', 'vit_base'], help="Name of architecture")
     parser.add_argument('--drop_path_rate', type=float, default=0.1, help="stochastic depth rate")
