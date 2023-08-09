@@ -19,8 +19,9 @@ from src.dataset_loader import build_dataset
 from src.preprocessing import DataAugmentationSiT, GMML_replace_list
 from args import get_args_parser
 
-# schedulers
+# BackProp related
 from src.schedulers import sequentialLR, cosine_scheduler
+from src.optimizer import init_optimizer
 
 import utils
 from Architectures import SiT as vits
