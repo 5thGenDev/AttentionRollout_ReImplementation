@@ -5,7 +5,7 @@ import torch.nn as nn
 
 
 def employ_optimizer(
-    model,
+    param_groups,
     optim="adam",  # optimizer choices
     lr=0.003,  # learning rate
     weight_decay=5e-4,  # weight decay
@@ -15,9 +15,6 @@ def employ_optimizer(
     rmsprop_alpha=0.99,  # rmsprop's smoothing constant
     adam_beta1=0.9,  # exponential decay rate for adam's first moment
     adam_beta2=0.999,  # # exponential decay rate for adam's second moment
-    staged_lr=False,  # different lr for different layers
-    new_layers=None,  # new layers use the default lr, while other layers's lr is scaled by base_lr_mult
-    base_lr_mult=0.1,  # learning rate multiplier for base layers
 ):
     # Construct optimizer
     if optim == "adam":
