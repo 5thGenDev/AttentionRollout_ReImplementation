@@ -54,7 +54,7 @@ def train_SiT(args):
     cudnn.benchmark = True
 
     # prepare dataset
-    # Finetuned dataset has to be preprocessed exactly as pretrained dataset
+    # Finetuned dataset should be preprocessed like pretrained dataset
     transform = DataAugmentationSiT(args)
 
     # Need to fix this 
