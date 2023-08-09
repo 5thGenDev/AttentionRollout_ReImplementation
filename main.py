@@ -21,7 +21,7 @@ from args import get_args_parser
 
 # BackProp related
 from src.schedulers import sequentialLR, cosine_scheduler
-from src.optimizer import init_optimizer
+from src.optimizer import employ_optimizer
 
 import utils
 from Architectures import SiT as vits
@@ -97,7 +97,7 @@ def train_SiT(args):
 
     # preparing optimizer 
     # 1st argument for torch.optim is a dict of nn-weight-layers, each layer can have different lr
-    optimizer = torch.optim.AdamW(utils.get_params_groups(student))  # to use with ViTs
+    optimizer = employ_optimizer(utils.get_params_groups(student)) # to use with ViTs
 
     # for mixed precision training
     fp16_scaler = torch.cuda.amp.GradScaler() if args.use_fp16 else None
