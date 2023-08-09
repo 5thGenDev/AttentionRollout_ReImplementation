@@ -3,7 +3,7 @@
 import torch
 
 
-def init_lr_scheduler(
+def sequential(
     optimizer,
     epochs,
     warmup_epochs=5,
