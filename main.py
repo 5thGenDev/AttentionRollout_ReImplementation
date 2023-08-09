@@ -24,6 +24,11 @@ from vision_transformer import CLSHead, RECHead
 import torchvision
 
 
+# Global vars
+parser = get_args_parser()
+args = parser.parse_args()
+
+
 # replace from other images
 class collate_batch(object): 
     def __init__(self, drop_replace=0., drop_align=1):
@@ -297,7 +302,5 @@ class FullPipline(nn.Module):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser('SiT', parents=[get_args_parser()])
-    args = parser.parse_args()
     Path(args.output_dir).mkdir(parents=True, exist_ok=True)
     train_SiT(args)
