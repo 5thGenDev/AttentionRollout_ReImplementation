@@ -6,9 +6,9 @@ import torch.nn as nn
 
 def employ_optimizer(
     param_groups,
-    optim="adam",  # optimizer choices
-    lr=0.003,  # learning rate
-    weight_decay=5e-4,  # weight decay
+    optim="sgd",  # optimizer choices
+    lr=0.5,  # learning rate
+    weight_decay=2e-05,  # weight decay
     momentum=0.9,  # momentum factor for sgd and rmsprop
     sgd_dampening=0,  # sgd's dampening for momentum
     sgd_nesterov=False,  # whether to enable sgd's Nesterov momentum
