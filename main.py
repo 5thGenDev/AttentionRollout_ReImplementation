@@ -16,7 +16,7 @@ import torch.nn.functional as F
 
 #from datasets import load_dataset, datasets_utils
 from src.dataset_loader import build_dataset
-from args import
+from args import get_args_parser
 
 import utils
 import vision_transformer as vits
