@@ -54,7 +54,8 @@ def train_SiT(args):
     cudnn.benchmark = True
 
     # prepare dataset
-    # transform = datasets_utils.DataAugmentationSiT(args)
+    # Finetuned dataset has to be preprocessed exactly as pretrained dataset
+    transform = datasets_utils.DataAugmentationSiT(args)
 
     # Need to fix this 
     dataset, _ = build_dataset(args, True, trnsfrm=transform, training_mode = 'SSL')
