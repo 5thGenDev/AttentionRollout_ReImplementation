@@ -56,7 +56,6 @@ def train_SiT(args):
     # prepare dataset
     # Finetuned dataset should be preprocessed like pretrained dataset
     transform = DataAugmentationSiT(args)
-
     dataset, _ = build_dataset(args, True, trnsfrm=transform, training_mode = 'SSL')
     
     sampler = torch.utils.data.DistributedSampler(dataset, shuffle=True)
