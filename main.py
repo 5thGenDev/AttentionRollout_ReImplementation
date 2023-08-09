@@ -20,8 +20,8 @@ from src.preprocessing import DataAugmentationSiT, GMML_replace_list
 from args import get_args_parser
 
 import utils
-import vision_transformer as vits
-from vision_transformer import CLSHead, RECHead
+from Architectures import SiT as vits
+from Architectures.SiT import CLSHead, RECHead
 import torchvision
 
 
