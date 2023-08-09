@@ -95,6 +95,7 @@ def train_SiT(args):
     simclr_loss = SimCLR(args.simclr_temp).cuda()
 
     # preparing optimizer 
+    # 1st argument for torch.optim is a dict of nn-weight-layers, each layer can have different lr
     optimizer = torch.optim.AdamW(utils.get_params_groups(student))  # to use with ViTs
 
     # for mixed precision training
