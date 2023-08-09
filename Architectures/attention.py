@@ -61,6 +61,7 @@ class HydraAttention(nn.Module):
         kv = k * v
         if self.dropout.p > 0:
             kv = self.dropout(kv.transpose(-1, -2)).transpose(-1, -2) # dropout in seq dimension 
-        out = kv.sum(dim=-2, keepdim=True) * q
+        kv = kv.sum(dim=-2, keepdim=True)
+        out = q * kv
         
         return self.out(out)
