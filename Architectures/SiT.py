@@ -214,18 +214,30 @@ class VisionTransformer(nn.Module):
         x = self.prepare_tokens(x)
         for blk in self.blocks:
             x = blk(x)
-            
         x = self.norm(x)
         
         if classify==True:
             return self.head( torch.cat( (x[:, 0], torch.mean(x[:, 1:], dim=1)), dim=1 ) )   
-
         return x
+
+
+def vit_tiny(patch_size=16, **kwargs):
+    model = VisionTransformer(
+        patch_size=patch_size, embed_dim=192, depth=12, num_heads=3, mlp_ratio=4,
+        qkv_bias=True, norm_layer=partial(nn.LayerNorm, eps=1e-6), **kwargs)
+    return model
 
 
 def vit_small(patch_size=16, **kwargs):
     model = VisionTransformer(
         patch_size=patch_size, embed_dim=384, depth=12, num_heads=6, mlp_ratio=4,
+        qkv_bias=True, norm_layer=partial(nn.LayerNorm, eps=1e-6), **kwargs)
+    return model
+
+
+def vit_base(patch_size=16, **kwargs):
+    model = VisionTransformer(
+        patch_size=patch_size, embed_dim=768, depth=12, num_heads=12, mlp_ratio=4,
         qkv_bias=True, norm_layer=partial(nn.LayerNorm, eps=1e-6), **kwargs)
     return model
 
@@ -261,7 +273,6 @@ class CLSHead(nn.Module):
         return x
 
 
-
 class RECHead(nn.Module):
     def __init__(self, in_dim, in_chans=3, patch_size=16):
         super().__init__()
@@ -288,9 +299,7 @@ class RECHead(nn.Module):
 
     def forward(self, x):
         x = self.mlp(x)
-        
         x_rec = x.transpose(1, 2)
         out_sz = tuple( (  int(math.sqrt(x_rec.size()[2]))  ,   int(math.sqrt(x_rec.size()[2])) ) )
         x_rec = self.convTrans(x_rec.unflatten(2, out_sz))
-                
         return x_rec
