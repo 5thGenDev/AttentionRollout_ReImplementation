@@ -3,8 +3,7 @@
 - Motivation: Visualize each type of attention block and isolate their impact to image classification accuracy for ViT model.
 
 ## To compare different pretrained models
-- ***Pretrain new Attention-ViT for 800 epochs vs finetuning pretrained SiT for 100 epoches***
-- Compare the difference of their attention map. My hypothesis is that there isn't much difference from the point of view of attention map (see Hydra Attention vs Self Attention) so we need an alternative visualiser to describe different attention dynamics: 1 candidate would be weight-allocation difference among pixels in each a filter and between the  filters (see 2022U-Net non-isomorphic)
+- ***Pretrain new HydraAttention for 600 epochs on ImageNet new regime***
      
 ## Other Attention in ViT:
 Note that d_model = embed_dim already where d_model = number of tokens, head_dim = d_model/num_heads
@@ -12,6 +11,6 @@ Note that d_model = embed_dim already where d_model = number of tokens, head_dim
 - [ ] Dilated-Self Attention used for LongNet: Also linear complexity. Reimplemented by https://github.com/alexisrozhkov/dilated-self-attention  
           
 ## Other than Attention Rollout
-- [ ] Attention Rollout
+- [x] Attention Rollout
 - [ ] Gradient-based Attention Rollout
 - [ ] ????
