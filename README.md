@@ -2,9 +2,8 @@
 - Original paper: https://arxiv.org/pdf/2005.00928.pdf. 
 - Motivation: Visualize each type of attention block and isolate their impact to image classification accuracy for ViT model.
 
-## Finetune datasets: Flowers/Pets/CIFAR10
-
 ## To compare different pretrained models
+***Finetune datasets: Flowers/Pets/CIFAR10***
 1. Pretrain SiT-HydraAttention for 600 epochs on ImageNet and finetune on Flowers/Pets/CIFAR10
 2. Finetuned SiT-SelfAttention on Flowers/Pets/CIFAR10
      
