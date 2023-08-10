@@ -2,8 +2,11 @@
 - Original paper: https://arxiv.org/pdf/2005.00928.pdf. 
 - Motivation: Visualize each type of attention block and isolate their impact to image classification accuracy for ViT model.
 
+## Finetune datasets: Flowers/Pets/CIFAR10
+
 ## To compare different pretrained models
-- ***Pretrain new HydraAttention for 600 epochs on ImageNet new regime***
+1. Pretrain SiT-HydraAttention for 600 epochs on ImageNet and finetune on Flowers/Pets/CIFAR10
+2. Finetuned SiT-SelfAttention on Flowers/Pets/CIFAR10
      
 ## Other Attention in ViT:
 Note that d_model = embed_dim already where d_model = number of tokens, head_dim = d_model/num_heads
