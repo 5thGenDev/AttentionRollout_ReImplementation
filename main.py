@@ -6,6 +6,7 @@ from torchvision import transforms
 import numpy as np
 import cv2
 
+from attention_visualizer.heatmap import show_mask_on_image
 from vit_rollout import VITAttentionRollout
 from vit_grad_rollout import VITAttentionGradRollout
 
@@ -31,14 +32,6 @@ def get_args():
 
     return args
 
-def show_mask_on_image(img, mask):
-    img = np.float32(img) / 255
-    heatmap = cv2.applyColorMap(np.uint8(255 * mask), cv2.COLORMAP_JET)
-    heatmap = np.float32(heatmap) / 255
-    heatmap = cv2.cvtColor(heatmap, cv2.COLOR_BGR2RGB)
-    cam = heatmap + np.float32(img)
-    cam = cam / np.max(cam)
-    return np.uint8(255 * cam)
 
 if __name__ == '__main__':
     args = get_args()
