@@ -1,35 +1,6 @@
-import argparse
-import sys
-import torch
 from PIL import Image
-from torchvision import transforms
 import numpy as np
 import cv2
-
-from vit_rollout import VITAttentionRollout
-from vit_grad_rollout import VITAttentionGradRollout
-
-def get_args():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--use_cuda', action='store_true', default=False,
-                        help='Use NVIDIA GPU acceleration')
-    parser.add_argument('--image_path', type=str, default='./examples/both.png',
-                        help='Input image path')
-    parser.add_argument('--head_fusion', type=str, default='max',
-                        help='How to fuse the attention heads for attention rollout. \
-                        Can be mean/max/min')
-    parser.add_argument('--discard_ratio', type=float, default=0.9,
-                        help='How many of the lowest 14x14 attention paths should we discard')
-    parser.add_argument('--category_index', type=int, default=None,
-                        help='The category index for gradient rollout')
-    args = parser.parse_args()
-    args.use_cuda = args.use_cuda and torch.cuda.is_available()
-    if args.use_cuda:
-        print("Using GPU")
-    else:
-        print("Using CPU")
-
-    return args
 
 def show_mask_on_image(img, mask):
     img = np.float32(img) / 255
