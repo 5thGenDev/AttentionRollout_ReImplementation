@@ -72,7 +72,7 @@ class Hook:
         self.outputs=[]
         
         # Prior to the line: "for h in hook_handlers: h.remove()"
-        # Also collects the outputs of many heads-Scaled Dot-Product Attention or Hydra Attention
+        # Collects many heads-outputs of Scaled Dot-Product Attention or Hydra Attention
         hook_handlers = list(self.register_hook()) 
         
         # Not tracking gradient to free up memory
