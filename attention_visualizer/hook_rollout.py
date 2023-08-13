@@ -50,7 +50,7 @@ class Hook:
 
         Args:
             model (nn.Module): ViTs
-            module (str, optional): Name of module. 'attn.attn_drop' for attn matrix; 'block' for outputs of blocks. Defaults to 'attn.attn_drop'.
+            module (str, optional): Name of module. 'attn_drop' for attn matrix; 'block' for outputs of blocks.
         """
         assert mode in ["input", "output"]
         self.mode = mode 
