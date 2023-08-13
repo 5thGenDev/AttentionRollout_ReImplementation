@@ -16,9 +16,9 @@ def get_args():
                         help='Use NVIDIA GPU acceleration')
     parser.add_argument('--image_path', type=str, default='./examples/both.png',
                         help='Input image path')
-    parser.add_argument('--head_fusion', type=str, default='max',
-                        help='How to fuse the attention heads for attention rollout. \
-                        Can be mean/max/min')
+    parser.add_argument('--head_fusion', type=str, default='max', choices=['max', 'mean', 'min'], 
+                        help='How to fuse the attention heads for attention rollout')
+    
     args = parser.parse_args()
     args.use_cuda = args.use_cuda and torch.cuda.is_available()
     if args.use_cuda:
