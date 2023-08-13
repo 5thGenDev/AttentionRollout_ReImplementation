@@ -8,10 +8,10 @@ import cv2
 from torch import nn
 
 
-def rollout(attentions, discard_ratio, head_fusion):
-    result = torch.eye(attentions[0].size(-1))
+def rollout(outputs, discard_ratio, head_fusion):
+    result = torch.eye(outputs[0].size(-1))
     with torch.no_grad():
-        for attention in attentions:
+        for attention in outputs:
             if head_fusion == "mean":
                 attention_heads_fused = attention.mean(axis=1)
             elif head_fusion == "max":
