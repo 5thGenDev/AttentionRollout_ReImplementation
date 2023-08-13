@@ -40,31 +40,29 @@ def rollout(outputs, head_fusion):
 
 
 class Hook:
-    def __init__(self,model: nn.Module, module='attn_drop',head_fusion="mean", mode="output") -> None:
+    def __init__(self,model: nn.Module, module='attn_drop',head_fusion="mean") -> None:
         """set a hook to get the intermedia results
 
         Args:
             model (nn.Module): ViTs
             module (str, optional): Name of module. 'attn_drop' for attn matrix; 'block' for outputs of blocks.
         """
-        assert mode in ["input", "output"]
-        self.mode = mode 
         self.model = model
         self.module = module
-        
+
+        # PyTorch does its thing
+        self.register_hook()
+                
     def register_hook(self):
         for name, m in self.model.named_modules():
             if name.endswith(self.module):
                 yield m.register_forward_hook(self._hook)
     
     def _hook(self, m, input, output):
-        if self.mode == "output":
-            self.outputs.append(output)
-        else:
-            self.outputs.append(input)
+        self.outputs.append(output)
         
     def __call__(self, input_tensor):
-        self.outputs=[]
+        self.outputs = []
         
         # Prior to the line: "for h in hook_handlers: h.remove()"
         # Collects many heads-outputs of Scaled Dot-Product Attention or Hydra Attention
