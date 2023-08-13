@@ -8,7 +8,7 @@ import cv2
 from torch import nn
 
 
-def rollout(outputs, discard_ratio, head_fusion):
+def rollout(outputs, head_fusion):
     result = torch.eye(outputs[0].size(-1))
     with torch.no_grad():
         for attention in outputs:
@@ -20,13 +20,6 @@ def rollout(outputs, discard_ratio, head_fusion):
                 attention_heads_fused = attention.min(axis=1)[0]
             else:
                 raise "Attention head fusion type Not supported"
-
-            # Drop the lowest attentions, but
-            # don't drop the class token
-            flat = attention_heads_fused.view(attention_heads_fused.size(0), -1)
-            _, indices = flat.topk(int(flat.size(-1)*discard_ratio), -1, False)
-            indices = indices[indices != 0]
-            flat[0, indices] = 0
 
             I = torch.eye(attention_heads_fused.size(-1))
             a = (attention_heads_fused + 1.0*I)/2
@@ -74,7 +67,7 @@ class Hook:
         # Prior to the line: "for h in hook_handlers: h.remove()"
         # Collects many heads-outputs of Scaled Dot-Product Attention or Hydra Attention
         hook_handlers = list(self.register_hook()) 
-        mask = rollout(self.outputs, self.discard_ratio, self.head_fusion)
+        mask = rollout(self.outputs, self.head_fusion)
 
         ##  Code to free up memory and computation
         # Not tracking gradient 
