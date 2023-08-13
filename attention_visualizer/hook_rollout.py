@@ -69,8 +69,6 @@ class Hook:
         hook_handlers = list(self.register_hook()) 
         mask = rollout(self.outputs, self.head_fusion)
 
-        ##  Code to free up memory and computation
-        # Not tracking gradient 
         with torch.no_grad():
             output = self.model(input_tensor)        
         
