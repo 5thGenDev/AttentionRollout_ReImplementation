@@ -41,6 +41,8 @@ def rollout(attentions, discard_ratio, head_fusion):
     mask = mask / np.max(mask)
     return mask    
 
+
+# basically an adaptation of hook function
 class VITAttentionRollout:
     def __init__(self, model, attention_layer_name='attn_drop', head_fusion="mean",
         discard_ratio=0.9):
