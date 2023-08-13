@@ -40,7 +40,7 @@ def rollout(outputs, head_fusion):
 
 
 class Hook:
-    def __init__(self,model: nn.Module, module='attn_drop',head_fusion="mean", discard_ratio=0.9, mode="output") -> None:
+    def __init__(self,model: nn.Module, module='attn_drop',head_fusion="mean", mode="output") -> None:
         """set a hook to get the intermedia results
 
         Args:
