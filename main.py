@@ -7,7 +7,7 @@ import numpy as np
 import cv2
 
 from attention_visualizer.heatmap import show_mask_on_image
-from attention_visualizer.hook_rollout import 
+from attention_visualizer.hook_rollout import Hook
 from vit_rollout import VITAttentionRollout
 
 def get_args():
