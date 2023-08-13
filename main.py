@@ -21,8 +21,6 @@ def get_args():
                         Can be mean/max/min')
     parser.add_argument('--discard_ratio', type=float, default=0.9,
                         help='How many of the lowest 14x14 attention paths should we discard')
-    parser.add_argument('--category_index', type=int, default=None,
-                        help='The category index for gradient rollout')
     args = parser.parse_args()
     args.use_cuda = args.use_cuda and torch.cuda.is_available()
     if args.use_cuda:
@@ -53,19 +51,11 @@ if __name__ == '__main__':
     if args.use_cuda:
         input_tensor = input_tensor.cuda()
 
-    if args.category_index is None:
-        print("Doing Attention Rollout")
-        attention_rollout = VITAttentionRollout(model, head_fusion=args.head_fusion, 
-            discard_ratio=args.discard_ratio)
-        mask = attention_rollout(input_tensor)
-        name = "attention_rollout_{:.3f}_{}.png".format(args.discard_ratio, args.head_fusion)
-    else:
-        print("Doing Gradient Attention Rollout")
-        grad_rollout = VITAttentionGradRollout(model, discard_ratio=args.discard_ratio)
-        mask = grad_rollout(input_tensor, args.category_index)
-        name = "grad_rollout_{}_{:.3f}_{}.png".format(args.category_index,
-            args.discard_ratio, args.head_fusion)
-
+    print("Doing Attention Rollout")
+    attention_rollout = VITAttentionRollout(model, head_fusion=args.head_fusion, 
+        discard_ratio=args.discard_ratio)
+    mask = attention_rollout(input_tensor)
+    name = "attention_rollout_{:.3f}_{}.png".format(args.discard_ratio, args.head_fusion)
 
     np_img = np.array(img)[:, :, ::-1]
     mask = cv2.resize(mask, (np_img.shape[1], np_img.shape[0]))
