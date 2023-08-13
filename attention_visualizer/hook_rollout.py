@@ -12,6 +12,7 @@ def rollout(outputs, head_fusion):
     result = torch.eye(outputs[0].size(-1))
     with torch.no_grad():
         for attention in outputs:
+            ## Taking mean of the maximum value across all heads
             if head_fusion == "mean":
                 attention_heads_fused = attention.mean(axis=1)
             elif head_fusion == "max":
