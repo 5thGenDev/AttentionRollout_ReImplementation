@@ -10,6 +10,7 @@ from torch import nn
 
 def rollout(outputs, head_fusion):
     result = torch.eye(outputs[0].size(-1))
+    
     with torch.no_grad():
         for head in outputs:
             ## Taking mean of the maximum value across all heads
