@@ -7,8 +7,8 @@ import numpy as np
 import cv2
 
 from attention_visualizer.heatmap import show_mask_on_image
+from attention_visualizer.hook_rollout import 
 from vit_rollout import VITAttentionRollout
-from vit_grad_rollout import VITAttentionGradRollout
 
 def get_args():
     parser = argparse.ArgumentParser()
