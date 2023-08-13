@@ -8,20 +8,16 @@ import cv2
 from torch import nn
 
 
-def rollout(outputs, head_fusion):
+def rollout(outputs):
     result = torch.eye(outputs[0].size(-1))
     
     with torch.no_grad():
         for head in outputs:
             ## Taking the mean of the maximum value across all heads
-            if head_fusion == "mean":
-                attention_heads_fused = head.mean(axis=1)
-            elif head_fusion == "max":
-                attention_heads_fused = head.max(axis=1)[0]
-            elif head_fusion == "min":
-                attention_heads_fused = head.min(axis=1)[0]
-            else:
-                raise "Attention head fusion type Not supported"
+            # Max across all head
+            attention_heads_fused = head.max(axis=1)
+            # Mean of max values
+            attention_heads_fused = attention_heads_fused.mean(axis=1)
 
             I = torch.eye(attention_heads_fused.size(-1))
             a = (attention_heads_fused + 1.0*I)/2
@@ -40,7 +36,7 @@ def rollout(outputs, head_fusion):
 
 
 class Hook:
-    def __init__(self,model: nn.Module, module='attn_drop',head_fusion="mean") -> None:
+    def __init__(self,model: nn.Module, module='attn_drop') -> None:
         """set a hook to get the intermedia results
 
         Args:
@@ -66,7 +62,7 @@ class Hook:
         
         # Prior to the line: "for h in hook_handlers: h.remove()"
         # Collects many heads-outputs of Scaled Dot-Product Attention or Hydra Attention
-        mask = rollout(self.outputs, self.head_fusion)
+        mask = rollout(self.outputs)
         with torch.no_grad():
             output = self.model(input_tensor)        
         
