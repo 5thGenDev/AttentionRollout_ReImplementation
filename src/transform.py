@@ -1,4 +1,3 @@
-import PIL
 from torchvision import datasets, transforms
 
 # Input_size = 256
