@@ -13,7 +13,7 @@ def rollout(outputs, head_fusion):
     
     with torch.no_grad():
         for head in outputs:
-            ## Taking mean of the maximum value across all heads
+            ## Taking the mean of the maximum value across all heads
             if head_fusion == "mean":
                 attention_heads_fused = head.mean(axis=1)
             elif head_fusion == "max":
