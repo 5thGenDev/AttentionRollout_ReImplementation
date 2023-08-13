@@ -66,13 +66,8 @@ class Hook:
         
         # Prior to the line: "for h in hook_handlers: h.remove()"
         # Collects many heads-outputs of Scaled Dot-Product Attention or Hydra Attention
-        hook_handlers = list(self.register_hook()) 
         mask = rollout(self.outputs, self.head_fusion)
-
         with torch.no_grad():
             output = self.model(input_tensor)        
-        
-        # Remove registered forward and backward hook
-        for h in hook_handlers: h.remove()
         
         return mask
