@@ -19,8 +19,6 @@ def get_args():
     parser.add_argument('--head_fusion', type=str, default='max',
                         help='How to fuse the attention heads for attention rollout. \
                         Can be mean/max/min')
-    parser.add_argument('--discard_ratio', type=float, default=0.9,
-                        help='How many of the lowest 14x14 attention paths should we discard')
     args = parser.parse_args()
     args.use_cuda = args.use_cuda and torch.cuda.is_available()
     if args.use_cuda:
@@ -55,7 +53,7 @@ if __name__ == '__main__':
     attention_rollout = VITAttentionRollout(model, head_fusion=args.head_fusion, 
         discard_ratio=args.discard_ratio)
     mask = attention_rollout(input_tensor)
-    name = "attention_rollout_{:.3f}_{}.png".format(args.discard_ratio, args.head_fusion)
+    name = "attention_rollout_{}.png".format(args.head_fusion)
 
     np_img = np.array(img)[:, :, ::-1]
     mask = cv2.resize(mask, (np_img.shape[1], np_img.shape[0]))
