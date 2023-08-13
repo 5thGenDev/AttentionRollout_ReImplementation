@@ -50,8 +50,7 @@ if __name__ == '__main__':
         input_tensor = input_tensor.cuda()
 
     print("Doing Attention Rollout")
-    attention_rollout = VITAttentionRollout(model, head_fusion=args.head_fusion, 
-        discard_ratio=args.discard_ratio)
+    attention_rollout = Hook(model, head_fusion=args.head_fusion)
     mask = attention_rollout(input_tensor)
     name = "attention_rollout_{}.png".format(args.head_fusion)
 
