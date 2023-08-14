@@ -15,8 +15,6 @@ def get_args():
     parser.add_argument("--lr", default=0.0003, type=float, help="initial learning rate")
     parser.add_argument("--weight-decay", default=2e-05, type=float, help="weight decay")
     parser.add_argument("--epochs", default=4, type=int, help='4 is good starting point')
-    parser.add_argument("--warmup_epochs", default=5, type=int, help="Number of epochs for the linear learning-rate warm up.")
-    parser.add_argument("--min_lr", type=float, default=1e-6, help="Target LR at the end of optimization.")
     
     # sgd
     parser.add_argument("--momentum", default=0.9, type=float, help="momentum factor for sgd and rmsprop")
@@ -31,6 +29,14 @@ def get_args():
     parser.add_argument("--adam-beta2", default=0.999, type=float, help="exponential decay rate for adam's second moment")
     
 
+    ##LR_scheduler
+    parser.add_argument("--lr-scheduler", type=str, default="multi_step", help="learning rate scheduler (see lr_schedulers.py)")
+    parser.add_argument("--stepsize", default=[20, 40], nargs="+", type=int, help="stepsize to decay learning rate")
+    parser.add_argument("--gamma", default=0.1, type=float, help="learning rate decay")
+    parser.add_argument("--warmup_epochs", default=5, type=int, help="Number of epochs for the linear learning-rate warm up.")
+    parser.add_argument("--min_lr", type=float, default=1e-6, help="Target LR at the end of optimization.")
+
+    
     ## Dataset
     parser.add_argument('--data_set', default="Pets", type=str, choices=['CIFAR10', 'Flowers', 'Pets'], help='Name of the dataset.')
     parser.add_argument("--batch_size", default=128, type=int)
