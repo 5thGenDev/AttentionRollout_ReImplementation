@@ -1,22 +1,22 @@
 # Copyright (c) EEEM071, University of Surrey
 
 import torch
-import numpy 
 
-def sequentialLR(
+def init_lr_scheduler(
     optimizer,
+    lr_scheduler,  # learning rate scheduler
     epochs,
-    warmup_epochs=5,
-    min_lr=0,
+    stepsize=[20, 40],  # step size to decay learning rate
+    gamma=0.1,  # learning rate decay
 ):
     '''
     Read this line of code: https://github.com/pytorch/vision/blob/main/references/classification/train.py#L304
     and: https://pytorch.org/blog/how-to-train-state-of-the-art-models-using-torchvision-latest-primitives/#lr-optimizations
-    for warmup_epoch and warmup_decay
     '''
+    lr_warmup_epochs = 5
     lr_warmup_decay = 0.01
     warmup_lr_scheduler = torch.optim.lr_scheduler.LinearLR(
-        optimizer, start_factor=lr_warmup_decay, total_iters=warmup_epochs
+        optimizer, start_factor=lr_warmup_decay, total_iters=lr_warmup_epochs
     )
 
     '''
@@ -24,24 +24,22 @@ def sequentialLR(
     and: https://pytorch.org/blog/how-to-train-state-of-the-art-models-using-torchvision-latest-primitives/#:~:text=decaying%20the%20LR%20up%20to%20zero
     '''
     main_lr_scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(
-        optimizer, T_max=epochs - warmup_epochs, eta_min=min_lr
+        optimizer, T_max=epochs - lr_warmup_epochs, eta_min=0
     )
+    
+    if lr_scheduler == "single_step":
+        return torch.optim.lr_scheduler.StepLR(
+            optimizer, step_size=stepsize[0], gamma=gamma
+        )
 
-    # This is the schedule
-    return torch.optim.lr_scheduler.SequentialLR(
-        optimizer, schedulers=[warmup_lr_scheduler, main_lr_scheduler], milestones=[warmup_epochs]
-    )
+    elif lr_scheduler == "multi_step":
+        return torch.optim.lr_scheduler.MultiStepLR(
+            optimizer, milestones=stepsize, gamma=gamma
+        )
 
-
-def cosine_scheduler(base_value, final_value, epochs, niter_per_ep, warmup_epochs=0, start_warmup_value=0):
-    warmup_schedule = np.array([])
-    warmup_iters = warmup_epochs * niter_per_ep
-    if warmup_epochs > 0:
-        warmup_schedule = np.linspace(start_warmup_value, base_value, warmup_iters)
-
-    iters = np.arange(epochs * niter_per_ep - warmup_iters)
-    schedule = final_value + 0.5 * (base_value - final_value) * (1 + np.cos(np.pi * iters / len(iters)))
-
-    schedule = np.concatenate((warmup_schedule, schedule))
-    assert len(schedule) == epochs * niter_per_ep
-    return schedule
+    elif lr_scheduler == "sequential":
+        return torch.optim.lr_scheduler.SequentialLR(
+            optimizer, schedulers=[warmup_lr_scheduler, main_lr_scheduler], milestones=[lr_warmup_epochs]
+        )
+    else:
+        raise ValueError(f"Unsupported lr_scheduler: {lr_scheduler}")
