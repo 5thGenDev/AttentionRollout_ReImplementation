@@ -45,7 +45,7 @@ def argument_parser():
 
     
     ## GPUs
-    parser.add_argument('--use_cuda', action='store_true', default=True, help='Use NVIDIA GPU acceleration')
+    parser.add_argument("--use-cpu", action="store_true", help="use cpu")
     parser.add_argument("--gpu-devices", default="0", type=str, help="gpu device ids for CUDA_VISIBLE_DEVICES")
     parser.add_argument("--use-avai-gpus", action="store_true", help="use available gpus instead of specified devices (useful when using managed clusters)")
     parser.add_argument("--workers", default=4, type=int, help="number of data loading workers (tips: 4 or 8 times number of gpus)")
