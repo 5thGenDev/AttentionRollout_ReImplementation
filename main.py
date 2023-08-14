@@ -46,13 +46,9 @@ def train(model, train_loader, optimizer, criterion, num_epochs, device, save_di
 
         epoch_loss = running_loss / len(train_loader.dataset)
         train_losses.append(epoch_loss)
-
-        # Save model checkpoint if this epoch has a lower training loss
         if epoch_loss < best_train_loss:
             best_train_loss = epoch_loss
             save_checkpoint(model, optimizer, epoch, directory=save_dir, filename=save_name)
-
-    return train_losses
 
 
 if __name__ == '__main__':
