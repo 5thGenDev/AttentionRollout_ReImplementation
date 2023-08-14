@@ -247,9 +247,9 @@ def vit_base_16(patch_size=16, **kwargs):
         qkv_bias=True, norm_layer=partial(nn.LayerNorm, eps=1e-6), **kwargs)
     return model
 
-def vit_base_32(patch_size=32, **kwargs):
+def vit_large_32(patch_size=32, **kwargs):
     model = VisionTransformer(
-        patch_size=patch_size, embed_dim=768, depth=12, num_heads=12, mlp_ratio=4,
+        patch_size=patch_size, embed_dim=768, depth=24, num_heads=16, mlp_ratio=4,
         qkv_bias=True, norm_layer=partial(nn.LayerNorm, eps=1e-6), **kwargs)
     return model
 
