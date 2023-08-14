@@ -8,28 +8,9 @@ import cv2
 
 from attention_visualizer.heatmap import show_mask_on_image
 from attention_visualizer.hook_rollout import Hook
-from vit_rollout import VITAttentionRollout
-
-def get_args():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--use_cuda', action='store_true', default=False,
-                        help='Use NVIDIA GPU acceleration')
-    parser.add_argument('--image_path', type=str, default='./examples/both.png',
-                        help='Input image path')
-    parser.add_argument('--head_fusion', type=str, default='max', choices=['max', 'mean', 'min'], 
-                        help='How to fuse the attention heads for attention rollout')
-    
-    args = parser.parse_args()
-    args.use_cuda = args.use_cuda and torch.cuda.is_available()
-    if args.use_cuda:
-        print("Using GPU")
-    else:
-        print("Using CPU")
-
-    return args
-
 
 if __name__ == '__main__':
+    set_random_seed(args.seed)
     args = get_args()
     model = torch.hub.load('facebookresearch/deit:main', 
         'deit_tiny_patch16_224', pretrained=True)
