@@ -8,21 +8,19 @@ import cv2
 from torch import nn
 
 
-def rollout(outputs):
-    result = torch.eye(outputs[0].size(-1))
+def rollout(encoderblock_outputs):
+    result = torch.eye(encoderblock_outputs[0].size(-1))
     
     with torch.no_grad():
-        for head in outputs:
-            ## Taking the mean of the maximum value across all heads
-            # Max across all head
-            attention_heads_fused = head.max(axis=1)
-            # Mean of max values
-            attention_heads_fused = attention_heads_fused.mean(axis=1)
-
+        # Taking the mean of the maximum value across all heads
+        for multihead in encoderblock_outputs:
+            # Max across each multihead
+            attention_heads_fused = multihead.max(axis=1)[0]
             I = torch.eye(attention_heads_fused.size(-1))
             a = (attention_heads_fused + 1.0*I)/2
-            a = a / a.sum(dim=-1, keepdim=True)
 
+            # Mean of max values
+            a = a / a.sum(dim=-1, keepdim=True)
             result = torch.matmul(a, result)
     
     # Look at the total attention between the class token,
@@ -59,9 +57,6 @@ class Hook:
         
     def __call__(self, input_tensor):
         self.outputs = []
-        
-        # Prior to the line: "for h in hook_handlers: h.remove()"
-        # Collects many heads-outputs of Scaled Dot-Product Attention or Hydra Attention
         mask = rollout(self.outputs)
         with torch.no_grad():
             output = self.model(input_tensor)        
