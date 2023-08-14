@@ -57,7 +57,9 @@ def train(model, train_loader, optimizer, criterion, num_epochs, device, save_di
 
 if __name__ == '__main__':
     set_random_seed(args.seed)
-    args = get_args()
+    
+    parser = argument_parser()
+    args = parser.parse_args()
 
     ### CUDA stuffs
     if not args.use_avai_gpus:
