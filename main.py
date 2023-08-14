@@ -2,6 +2,7 @@ import argparse
 import sys
 import torch
 import torch.backends.cudnn as cudnn
+import torch.nn as nn
 
 
 from Architectures import vit 
@@ -9,6 +10,7 @@ from src.load_dataset import build_dataset
 from src.transform import build_transform
 from src.optimizer import employ_optimizer
 from src.schedulers import init_lr_scheduler
+from args import argument_parser, optimizer_kwargs, lr_scheduler_kwargs
 
 
 def save_checkpoint(model, optimizer, epoch, directory, filename='checkpoint.pth'):
@@ -25,8 +27,10 @@ def save_checkpoint(model, optimizer, epoch, directory, filename='checkpoint.pth
     
 
 def train(model, train_loader, optimizer, criterion, num_epochs, device, save_dir='checkpoints', save_name='vit_checkpoint.pth'):
+    model.to(device)
+
     train_losses = []
-    best_train_loss = float('inf')  # Initialize with a high value
+    best_train_loss = float('inf') 
 
     for epoch in range(num_epochs):
         model.train()
@@ -69,9 +73,10 @@ if __name__ == '__main__':
 
     ### main pipeline
     transform = build_transform(is_train=True)
-    data_loader, classes = build_dataset(args, is_train=True, trnsfrm=transform)
+    train_loader, classes = build_dataset(args, is_train=True, trnsfrm=transform)
     model = vit.__dict__[args.model](img_size=224, num_classes=classes)
-    model = model.to(device)
     optimizer = employ_optimizer(model, **optimizer_kwargs(args))
     scheduler = init_lr_scheduler(optimizer, **lr_scheduler_kwargs(args))
+    criterion = nn.CrossEntropyLoss()
+    train(model, train_loader, optimizer, criterion, num_epochs=args.epochs, device=device)
    
