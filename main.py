@@ -22,7 +22,7 @@ def save_checkpoint(model, optimizer, epoch, directory, filename='checkpoint.pth
         'optimizer_state_dict': optimizer.state_dict(),
     }
     torch.save(checkpoint, checkpoint_path)
-
+    
 
 def train(model, train_loader, optimizer, criterion, num_epochs, device, save_path='vit_checkpoint.pth'):
     train_losses = []
