@@ -48,8 +48,9 @@ request_memory 	= 26G
 MaxJobRetirementTime = 0
 
 # -----------------------------------
-arguments = $(script) --use-avai-gpus --workers 4 --model $(model) --data_location $(root) --data_set CIFAR10 --optim sgd --lr 0.5 --weight-decay 2e-05 --lr-scheduler sequential --epochs 4 --batch-size 128 --save-dir $(save)
+arguments = $(script) --use-avai-gpus --workers 4 --model $(model) --data_location $(root) --data_set $(dataset) --optim sgd --lr 0.5 --weight-decay 2e-05 --lr-scheduler sequential --epochs 4 --batch-size 128 --save-dir $(save)
 
+dataset = CIFAR10
 root = /mnt/fast/nobackup/users/nt00601/content
 save = /mnt/fast/nobackup/users/nt00601/AttentionRollout/logs/$(a)/$(dataset)
 script = /mnt/fast/nobackup/users/nt00601/CourseWork-main/main.py
