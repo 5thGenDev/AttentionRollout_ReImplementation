@@ -24,9 +24,9 @@ def save_checkpoint(model, optimizer, epoch, directory, filename='checkpoint.pth
     torch.save(checkpoint, checkpoint_path)
     
 
-def train(model, train_loader, optimizer, criterion, num_epochs, device, save_path='vit_checkpoint.pth'):
+def train(model, train_loader, optimizer, criterion, num_epochs, device, save_dir='checkpoints', save_name='vit_checkpoint.pth'):
     train_losses = []
-    best_train_loss = float('inf') 
+    best_train_loss = float('inf')  # Initialize with a high value
 
     for epoch in range(num_epochs):
         model.train()
@@ -50,7 +50,7 @@ def train(model, train_loader, optimizer, criterion, num_epochs, device, save_pa
         # Save model checkpoint if this epoch has a lower training loss
         if epoch_loss < best_train_loss:
             best_train_loss = epoch_loss
-            save_checkpoint(model, optimizer, epoch, save_path)
+            save_checkpoint(model, optimizer, epoch, directory=save_dir, filename=save_name)
 
         print(f"Epoch {epoch+1}/{num_epochs}, Train Loss: {epoch_loss:.4f}")
 
