@@ -48,7 +48,6 @@ def get_args():
 
 
 
-
 def optimizer_kwargs(parsed_args):
     """
     Build kwargs for optimizer in optimizers.py from
@@ -64,4 +63,18 @@ def optimizer_kwargs(parsed_args):
         "rmsprop_alpha": parsed_args.rmsprop_alpha,
         "adam_beta1": parsed_args.adam_beta1,
         "adam_beta2": parsed_args.adam_beta2,
+    }
+
+
+
+def lr_scheduler_kwargs(parsed_args):
+    """
+    Build kwargs for lr_scheduler in lr_schedulers.py from
+    the parsed command-line arguments.
+    """
+    return {
+        "lr_scheduler": parsed_args.lr_scheduler,
+        "epochs": parsed_args.max_epoch,
+        "stepsize": parsed_args.stepsize,
+        "gamma": parsed_args.gamma,
     }
