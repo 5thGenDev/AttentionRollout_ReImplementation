@@ -70,8 +70,7 @@ if __name__ == '__main__':
     if use_gpu:
         print(f"Currently using GPU {args.gpu_devices}")
         cudnn.benchmark = True
-    else:
-        warnings.warn("Currently using CPU, however, GPU is highly recommended")
+        device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
     ### main pipeline
     transform = build_transform(is_train=True)
