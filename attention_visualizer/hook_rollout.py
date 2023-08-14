@@ -1,6 +1,4 @@
 import torch
-import sys
-from torchvision import transforms
 import numpy as np
 import cv2
 from torch import nn
