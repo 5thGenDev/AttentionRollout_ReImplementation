@@ -52,8 +52,6 @@ def train(model, train_loader, optimizer, criterion, num_epochs, device, save_di
             best_train_loss = epoch_loss
             save_checkpoint(model, optimizer, epoch, directory=save_dir, filename=save_name)
 
-        print(f"Epoch {epoch+1}/{num_epochs}, Train Loss: {epoch_loss:.4f}")
-
     return train_losses
 
 
