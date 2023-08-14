@@ -77,4 +77,6 @@ def lr_scheduler_kwargs(parsed_args):
         "epochs": parsed_args.max_epoch,
         "stepsize": parsed_args.stepsize,
         "gamma": parsed_args.gamma,
+        "warmup_epochs": parsed_args.warmup_epochs,
+        "min_lr": parsed_args.min_lr,
     }
