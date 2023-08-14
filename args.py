@@ -12,7 +12,7 @@ def argument_parser():
     
     ## Optimizers
     parser.add_argument("--optim", type=str, default="sgd", help="optimization algorithm (see optimizers.py)")
-    parser.add_argument("--lr", default=0.0003, type=float, help="initial learning rate")
+    parser.add_argument("--lr", default=0.5, type=float, help="initial learning rate")
     parser.add_argument("--weight-decay", default=2e-05, type=float, help="weight decay")
     parser.add_argument("--epochs", default=4, type=int, help='4 is good starting point')
     
