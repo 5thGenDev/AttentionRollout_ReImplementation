@@ -27,7 +27,6 @@ def build_dataset(args, is_train, trnsfrm=None):
         print('dataloader of {} is not implemented .. please add the dataloader under datasets folder.'.format(args.data_set))
         sys.exit(1)
 
-    sampler = torch.utils.data.DistributedSampler(dataset, shuffle=True)
     data_loader = torch.utils.data.DataLoader(dataset, sampler=sampler, batch_size=args.batch_size, 
                                               num_workers=args.num_workers, pin_memory=True, drop_last=True)
     print(f"Data loaded: there are {len(dataset)} images.")
