@@ -3,6 +3,7 @@ import sys
 import torch
 
 from Architectures import vit 
+from src.load_dataset import build_dataset
 
 if __name__ == '__main__':
     set_random_seed(args.seed)
