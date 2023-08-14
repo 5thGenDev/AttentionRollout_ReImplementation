@@ -24,7 +24,7 @@ def sequentialLR(
     and: https://pytorch.org/blog/how-to-train-state-of-the-art-models-using-torchvision-latest-primitives/#:~:text=decaying%20the%20LR%20up%20to%20zero
     '''
     main_lr_scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(
-        optimizer, T_max=epochs - lr_warmup_epochs, eta_min=min_lr
+        optimizer, T_max=epochs - warmup_epochs, eta_min=min_lr
     )
 
     # This is the schedule
