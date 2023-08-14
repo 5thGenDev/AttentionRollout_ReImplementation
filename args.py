@@ -21,7 +21,6 @@ def get_args():
     parser.add_argument('--data_set', default='Pets', type=str, choices=['CIFAR10', 'Flowers', 'Pets'], help='Name of the dataset.')
     parser.add_argument('--data_location', default='/path/to/dataset', type=str, help='Dataset location.')
     parser.add_argument('--output_dir', default="checkpoints/vit_small/trial", type=str, help='Path to save logs and checkpoints.')
-    parser.add_argument('--saveckp_freq', default=20, type=int, help='Save checkpoint every x epochs.')
     parser.add_argument('--num_workers', default=8, type=int, help='4-8x # of GPUs.')
 
     # GPUs
