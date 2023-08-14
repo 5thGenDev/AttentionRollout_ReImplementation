@@ -1,6 +1,6 @@
 import argparse
 
-def get_args():
+def argument_parser():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
     ## Model parameters
