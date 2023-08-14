@@ -41,7 +41,7 @@ def argument_parser():
     parser.add_argument('--data_set', default="Pets", type=str, choices=['CIFAR10', 'Flowers', 'Pets'], help='Name of the dataset.')
     parser.add_argument("--batch_size", default=128, type=int)
     parser.add_argument('--data_location', default='/path/to/dataset', type=str, help='Dataset location.')
-    parser.add_argument('--output_dir', default="checkpoints/vit_small/trial", type=str, help='Path to save logs and checkpoints.')
+    parser.add_argument("--save-dir", type=str, default="log", help="path to save log and model weights")
     parser.add_argument("--workers", default=4, type=int, help="number of data loading workers (tips: 4 or 8 times number of gpus)")
 
     
