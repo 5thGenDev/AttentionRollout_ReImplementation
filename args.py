@@ -42,13 +42,13 @@ def argument_parser():
     parser.add_argument("--batch_size", default=128, type=int)
     parser.add_argument('--data_location', default='/path/to/dataset', type=str, help='Dataset location.')
     parser.add_argument("--save-dir", type=str, default="log", help="path to save log and model weights")
-    parser.add_argument("--workers", default=4, type=int, help="number of data loading workers (tips: 4 or 8 times number of gpus)")
 
     
     ## GPUs
     parser.add_argument('--use_cuda', action='store_true', default=True, help='Use NVIDIA GPU acceleration')
     parser.add_argument("--gpu-devices", default="0", type=str, help="gpu device ids for CUDA_VISIBLE_DEVICES")
     parser.add_argument("--use-avai-gpus", action="store_true", help="use available gpus instead of specified devices (useful when using managed clusters)")
+    parser.add_argument("--workers", default=4, type=int, help="number of data loading workers (tips: 4 or 8 times number of gpus)")
         
     return args
 
