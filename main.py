@@ -31,4 +31,5 @@ if __name__ == '__main__':
     data_loader, classes = build_dataset(args, is_train=True, trnsfrm=transform)
     model = vit.__dict__[args.model](img_size=224, num_classes=classes)
     optimizer = employ_optimizer(model, **optimizer_kwargs(args))
+    scheduler = init_lr_scheduler(optimizer, **lr_scheduler_kwargs(args))
    
