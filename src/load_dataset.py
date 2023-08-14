@@ -2,6 +2,7 @@
 
 import os
 import sys
+import torch
 from torchvision import datasets as D
 
 
