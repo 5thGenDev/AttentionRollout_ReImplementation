@@ -52,8 +52,8 @@ arguments = $(script) --use-avai-gpus --workers 4 --model $(model) --data_locati
 
 dataset = CIFAR10
 root = /mnt/fast/nobackup/users/nt00601/content
-save = /mnt/fast/nobackup/users/nt00601/AttentionRollout-Reimplementation-main/logs/$(model)/$(dataset)
-script = /mnt/fast/nobackup/users/nt00601/AttentionRollout-Reimplementation-main/main.py
+save = /mnt/fast/nobackup/users/nt00601/AttentionRollout_Reimplementation-main/logs/$(model)/$(dataset)
+script = /mnt/fast/nobackup/users/nt00601/AttentionRollout_Reimplementation-main/main.py
 
 queue 1 model in vit_base_16, vit_large_32, vit_huge_14
 
