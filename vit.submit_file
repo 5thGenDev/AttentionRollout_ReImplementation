@@ -56,3 +56,11 @@ save = /mnt/fast/nobackup/users/nt00601/AttentionRollout/logs/$(a)/$(dataset)
 script = /mnt/fast/nobackup/users/nt00601/CourseWork-main/main.py
 
 queue 1 model in vit_base_16, vit_large_32, vit_huge_14
+
+# -----------------------------------
+dataset = Flowers
+queue 1 model in vit_base_16, vit_large_32, vit_huge_14
+
+# -----------------------------------
+dataset = Pets
+queue 1 model in vit_base_16, vit_large_32, vit_huge_14
