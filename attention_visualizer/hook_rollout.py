@@ -1,6 +1,4 @@
 import torch
-from PIL import Image
-import numpy
 import sys
 from torchvision import transforms
 import numpy as np
