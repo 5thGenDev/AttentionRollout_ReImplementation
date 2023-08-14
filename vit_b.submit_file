@@ -6,7 +6,7 @@
 
 #---------------------------------------------
 # Name your batch so it's easy to distinguish in condor_q.
-JobBatchName = "vit_b"
+JobBatchName = "vit-cifar10"
 
 # --------------------------------------------
 # Executable: Choose cu version depends on docker_image
@@ -48,10 +48,10 @@ request_memory 	= 26G
 MaxJobRetirementTime = 0
 
 # -----------------------------------
-arguments = $(script) --use-avai-gpus --workers 4 --model vit_base_16 --data_location $(root) --optim sgd --lr 0.5 --weight-decay 2e-05 --lr-scheduler sequential --epochs 4 --batch-size 128 --save-dir $(save)
+arguments = $(script) --use-avai-gpus --workers 4 --model $(model) --data_location $(root) --data_set CIFAR10 --optim sgd --lr 0.5 --weight-decay 2e-05 --lr-scheduler sequential --epochs 4 --batch-size 128 --save-dir $(save)
 
 root = /mnt/fast/nobackup/users/nt00601/content
-save = /mnt/fast/nobackup/users/nt00601/CourseWork-main/logs/$(a)/Finetune/ColorAug
+save = /mnt/fast/nobackup/users/nt00601/AttentionRollout/logs/$(a)/$(dataset)
 script = /mnt/fast/nobackup/users/nt00601/CourseWork-main/main.py
 
-queue 1 a in resnet50, resnet50_fc512
+queue 1 model in vit_base_16, vit_large_32, vit_huge_14
