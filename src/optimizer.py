@@ -1,8 +1,6 @@
 # Copyright (c) EEEM071, University of Surrey
 
 import torch
-import torch.nn as nn
-
 
 def employ_optimizer(
     param_groups,
