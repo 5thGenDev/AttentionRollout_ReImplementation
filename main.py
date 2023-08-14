@@ -67,8 +67,8 @@ if __name__ == '__main__':
     use_gpu = torch.cuda.is_available()
     if args.use_cpu:
         use_gpu = False
+        device = 'cpu'
     if use_gpu:
-        print(f"Currently using GPU {args.gpu_devices}")
         cudnn.benchmark = True
         device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
