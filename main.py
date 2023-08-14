@@ -20,26 +20,9 @@ def save_checkpoint(model, optimizer, epoch, filename):
     torch.save(checkpoint, filename)
 
 
-def train(model, train_loader, val_loader, optimizer, criterion, num_epochs, device, save_path='vit_checkpoint.pth'):
-    """
-    Train a Vision Transformer model.
-
-    Parameters:
-    - model: the ViT model
-    - train_loader: data loader for training data
-    - val_loader: data loader for validation data
-    - optimizer: the optimizer
-    - criterion: the loss function
-    - num_epochs: number of epochs to train
-    - device: 'cuda' or 'cpu'
-    - save_path: path to save the best model checkpoint
-    """
-
-    # Store the loss and accuracy values for later visualization
+def train(model, train_loader, optimizer, criterion, num_epochs, device, save_path='vit_checkpoint.pth'):
     train_losses = []
-    val_losses = []
-    val_accuracies = []
-    best_val_accuracy = 0.0  
+    best_train_loss = float('inf')  # Initialize with a high value
 
     for epoch in range(num_epochs):
         model.train()
@@ -60,40 +43,14 @@ def train(model, train_loader, val_loader, optimizer, criterion, num_epochs, dev
         epoch_loss = running_loss / len(train_loader.dataset)
         train_losses.append(epoch_loss)
 
-        # Validation
-        model.eval()
-        val_loss = 0.0
-        correct = 0
-        total = 0
-        with torch.no_grad():
-            for images, labels in val_loader:
-                images, labels = images.to(device), labels.to(device)
-
-                outputs = model(images)
-                loss = criterion(outputs, labels)
-                val_loss += loss.item() * images.size(0)
-
-                _, predicted = outputs.max(1)
-                total += labels.size(0)
-                correct += predicted.eq(labels).sum().item()
-
-        val_loss = val_loss / len(val_loader.dataset)
-        val_losses.append(val_loss)
-
-        val_accuracy = 100. * correct / total
-        val_accuracies.append(val_accuracy)
-
-        # Save model checkpoint if this epoch has better validation accuracy
-        if val_accuracy > best_val_accuracy:
-            best_val_accuracy = val_accuracy
+        # Save model checkpoint if this epoch has a lower training loss
+        if epoch_loss < best_train_loss:
+            best_train_loss = epoch_loss
             save_checkpoint(model, optimizer, epoch, save_path)
 
-        print(f"Epoch {epoch+1}/{num_epochs}, "
-              f"Train Loss: {epoch_loss:.4f}, "
-              f"Validation Loss: {val_loss:.4f}, "
-              f"Validation Accuracy: {val_accuracy:.2f}%")
+        print(f"Epoch {epoch+1}/{num_epochs}, Train Loss: {epoch_loss:.4f}")
 
-    return train_losses, val_losses, val_accuracies
+    return train_losses
 
 
 if __name__ == '__main__':
