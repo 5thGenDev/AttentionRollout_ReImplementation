@@ -11,18 +11,22 @@ from src.optimizer import employ_optimizer
 from src.schedulers import init_lr_scheduler
 
 
-def save_checkpoint(model, optimizer, epoch, filename):
+def save_checkpoint(model, optimizer, epoch, directory, filename='checkpoint.pth'):
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+
+    checkpoint_path = os.path.join(directory, filename)
     checkpoint = {
         'epoch': epoch,
         'model_state_dict': model.state_dict(),
         'optimizer_state_dict': optimizer.state_dict(),
     }
-    torch.save(checkpoint, filename)
+    torch.save(checkpoint, checkpoint_path)
 
 
 def train(model, train_loader, optimizer, criterion, num_epochs, device, save_path='vit_checkpoint.pth'):
     train_losses = []
-    best_train_loss = float('inf')  # Initialize with a high value
+    best_train_loss = float('inf') 
 
     for epoch in range(num_epochs):
         model.train()
