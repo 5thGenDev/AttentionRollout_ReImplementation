@@ -6,7 +6,7 @@
 
 #---------------------------------------------
 # Name your batch so it's easy to distinguish in condor_q.
-JobBatchName = "vit-cifar10"
+JobBatchName = "vit"
 
 # --------------------------------------------
 # Executable: Choose cu version depends on docker_image
