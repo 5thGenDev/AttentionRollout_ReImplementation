@@ -8,7 +8,7 @@ import torch.nn as nn
 from Architectures import vit 
 from src.load_dataset import build_dataset
 from src.transform import build_transform
-from src.optimizer import employ_optimizer
+from src.optimizer import init_optimizer
 from src.schedulers import init_lr_scheduler
 from args import argument_parser, optimizer_kwargs, lr_scheduler_kwargs
 
@@ -74,7 +74,7 @@ if __name__ == '__main__':
     transform = build_transform(is_train=True)
     train_loader, classes = build_dataset(args, is_train=True, trnsfrm=transform)
     model = vit.__dict__[args.model](img_size=224, num_classes=classes)
-    optimizer = employ_optimizer(model, **optimizer_kwargs(args))
+    optimizer = init_optimizer(model, **optimizer_kwargs(args))
     scheduler = init_lr_scheduler(optimizer, **lr_scheduler_kwargs(args))
     criterion = nn.CrossEntropyLoss()
     train(model, train_loader, optimizer, criterion, num_epochs=args.epochs, device=device)
