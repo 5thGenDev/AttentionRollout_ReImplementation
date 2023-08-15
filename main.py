@@ -62,13 +62,10 @@ if __name__ == '__main__':
     ### CUDA stuffs
     if not args.use_avai_gpus:
         os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu_devices
-    use_gpu = torch.cuda.is_available()
     if args.use_cpu:
-        use_gpu = False
         device = 'cpu'
-    if use_gpu:
-        cudnn.benchmark = True
-        device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    cudnn.benchmark = True
+    device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
     ### main pipeline
     transform = build_transform(is_train=True)
