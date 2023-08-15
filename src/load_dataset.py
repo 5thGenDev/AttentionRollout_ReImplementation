@@ -19,7 +19,7 @@ def build_dataset(args, is_train, trnsfrm=None):
         dataset = D.Flowers102(root=root, split=split, transform=trnsfrm, download=True,)
         classes = 102
 
-    if args.data_Set == 'CIFAR10':
+    if args.data_set == 'CIFAR10':
         folder = 'CIFAR10'
         root = os.path.join(args.data_location, folder)
         dataset = D.CIFAR10(root=root, transform=trnsfrm, download=True,)
