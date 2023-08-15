@@ -1,6 +1,12 @@
 import torch.utils.model_zoo as model_zoo
 import torchvision
 
+model_urls = {
+    "vit_b_16": "http://download.pytorch.org/models/vit_b_16-c867db91.pth",
+    "vit_l_32": "http://download.pytorch.org/models/vit_l_32-c7638314.pth",
+    "vit_h_14": "http://download.pytorch.org/models/vit_h_14_lc_swag-c1eb923e.pth",
+}
+
 def init_pretrained_weights(model, model_url):
     """
     Initialize model with pretrained weights.
