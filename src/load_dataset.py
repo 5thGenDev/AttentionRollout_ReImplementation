@@ -14,7 +14,7 @@ def build_dataset(args, is_train, trnsfrm=None):
         dataset = D.OxfordIIITPet(root=root, split=split, transform=trnsfrm, download=True,)
         classes = 37
 
-    if agrs.data_set == 'Flowers':
+    if args.data_set == 'Flowers':
         folder = 'Oxford102Flowers'
         split = 'train' if is_train else 'test'
         root = os.path.join(args.data_location, folder)
