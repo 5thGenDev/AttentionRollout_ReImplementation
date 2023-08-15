@@ -9,13 +9,13 @@ from torchvision import datasets as D
 def build_dataset(args, is_train, trnsfrm=None):
     if args.data_set == 'Pets':
         split = 'trainval' if is_train else 'test'
-        root = os.path.join(args.data_location, folder)
+        root = os.path.join(args.data_location, 'oxford-iiit-pet')
         dataset = D.OxfordIIITPet(root=root, split=split, transform=trnsfrm, download=True,)
         classes = 37
 
     if args.data_set == 'Flowers':
         split = 'train' if is_train else 'test'
-        root = os.path.join(args.data_location, folder)
+        root = os.path.join(args.data_location, 'flowers-102')
         dataset = D.Flowers102(root=root, split=split, transform=trnsfrm, download=True,)
         classes = 102
 
