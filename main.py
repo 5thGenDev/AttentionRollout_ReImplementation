@@ -39,6 +39,7 @@ def train(model, train_loader, optimizer, criterion, num_epochs, device, save_di
         model.train()
 
         running_loss = 0.0
+        
         for images, labels in train_loader:
             images, labels = images.to(device), labels.to(device)
 
@@ -53,10 +54,12 @@ def train(model, train_loader, optimizer, criterion, num_epochs, device, save_di
 
         epoch_loss = running_loss / len(train_loader.dataset)
         train_losses.append(epoch_loss)
+        
         if epoch_loss < best_train_loss:
             best_train_loss = epoch_loss
             save_checkpoint(model, optimizer, epoch, directory=save_dir, filename=save_name)
-
+        
+        print(f"Epoch {epoch+1}/{num_epochs}, Train Loss: {epoch_loss:.4f}")
 
 ### To counter "name args is assigned before global declaration, put everything to def main()
 def main():
