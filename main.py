@@ -58,7 +58,8 @@ def train(model, train_loader, optimizer, criterion, num_epochs, device, save_di
             save_checkpoint(model, optimizer, epoch, directory=save_dir, filename=save_name)
 
 
-if __name__ == '__main__':
+### To counter "name args is assigned before global declaration, put everything to def main()
+def main():
     global args
 
     ### CUDA stuffs
@@ -77,4 +78,6 @@ if __name__ == '__main__':
     scheduler = init_lr_scheduler(optimizer, **lr_scheduler_kwargs(args))
     criterion = nn.CrossEntropyLoss()
     train(model, train_loader, optimizer, criterion, num_epochs=args.epochs, device=device)
-   
+    
+if __name__ == '__main__':
+    main()
