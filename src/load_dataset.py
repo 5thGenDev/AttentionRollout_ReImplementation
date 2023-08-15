@@ -22,7 +22,7 @@ def build_dataset(args, is_train, trnsfrm=None):
     if args.data_set == 'CIFAR10':
         folder = 'CIFAR10'
         root = os.path.join(args.data_location, folder)
-        dataset = D.CIFAR10(root=root, transform=trnsfrm, download=False,)
+        dataset = D.CIFAR10(root=root, transform=trnsfrm, download=True,)
         classes = 10
         
     else:
