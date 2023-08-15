@@ -12,6 +12,9 @@ from src.optimizer import init_optimizer
 from src.schedulers import init_lr_scheduler
 from args import argument_parser, optimizer_kwargs, lr_scheduler_kwargs
 
+parser = argument_parser()
+args = parser.parse_args()
+
 
 def save_checkpoint(model, optimizer, epoch, directory, filename='checkpoint.pth'):
     if not os.path.exists(directory):
@@ -56,8 +59,7 @@ def train(model, train_loader, optimizer, criterion, num_epochs, device, save_di
 
 
 if __name__ == '__main__':
-    parser = argument_parser()
-    args = parser.parse_args()
+    global args
 
     ### CUDA stuffs
     if not args.use_avai_gpus:
