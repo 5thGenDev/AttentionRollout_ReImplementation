@@ -50,7 +50,7 @@ def argument_parser():
     parser.add_argument("--use-avai-gpus", action="store_true", help="use available gpus instead of specified devices (useful when using managed clusters)")
     parser.add_argument("--workers", default=4, type=int, help="number of data loading workers (tips: 4 or 8 times number of gpus)")
         
-    return args
+    return parser
 
 
 
