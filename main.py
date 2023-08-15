@@ -80,7 +80,7 @@ def main():
     optimizer = init_optimizer(model, **optimizer_kwargs(args))
     scheduler = init_lr_scheduler(optimizer, **lr_scheduler_kwargs(args))
     criterion = nn.CrossEntropyLoss()
-    train(model, train_loader, optimizer, criterion, num_epochs=args.epochs, device=device)
+    train(model, train_loader, optimizer, criterion, num_epochs=args.epochs, device=device, save_dir=args.save_dir, save_name=args.model)
     
 if __name__ == '__main__':
     main()
