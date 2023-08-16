@@ -4,7 +4,7 @@ import os
 import sys
 import torch
 from torchvision import datasets as D
-from src.pets import OxfordIIIPets
+from src.pets import OxfordIIITPet
 from src.flowers import Flowers102
 
 
