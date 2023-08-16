@@ -1,3 +1,5 @@
+## Copied from https://pytorch.org/vision/stable/_modules/torchvision/datasets/flowers102.html#Flowers102
+
 from pathlib import Path
 from typing import Any, Callable, Optional, Tuple
 
