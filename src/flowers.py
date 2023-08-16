@@ -1,12 +1,16 @@
 ## Copied from https://pytorch.org/vision/stable/_modules/torchvision/datasets/flowers102.html#Flowers102
 
-from pathlib import Path
-from typing import Any, Callable, Optional, Tuple
+import os
+import os.path
+import pathlib
+from typing import Any, Callable, Optional, Union, Tuple
+from typing import Sequence
 
-import PIL.Image
+from PIL import Image
 
-from .utils import check_integrity, download_and_extract_archive, download_url, verify_str_arg
-from .vision import VisionDataset
+from torchvision.datasets.utils import download_and_extract_archive, verify_str_arg
+from torchvision.datasets.vision import VisionDataset
+
 
 
 class Flowers102(VisionDataset):
