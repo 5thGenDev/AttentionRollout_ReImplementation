@@ -1,7 +1,7 @@
 ## Copied from https://pytorch.org/vision/stable/_modules/torchvision/datasets/flowers102.html#Flowers102
 
 import os
-import os.path
+import os.path as Path
 import pathlib
 from typing import Any, Callable, Optional, Union, Tuple
 from typing import Sequence
