@@ -3,12 +3,14 @@
 import os
 import os.path
 import pathlib
-from typing import Any, Callable, Optional, Sequence, Tuple, Union
+from typing import Any, Callable, Optional, Union, Tuple
+from typing import Sequence
 
 from PIL import Image
 
-from .utils import download_and_extract_archive, verify_str_arg
-from .vision import VisionDataset
+from torchvision.datasets.utils import download_and_extract_archive, verify_str_arg
+from torchvision.datasets.vision import VisionDataset
+
 
 
 class OxfordIIITPet(VisionDataset):
