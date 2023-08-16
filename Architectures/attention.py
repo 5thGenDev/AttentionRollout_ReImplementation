@@ -49,6 +49,7 @@ class HydraAttention(nn.Module):
         x: (B, T, D)
         """
         q, k, v = self.qkv(x).chunk(3, dim=-1)
+        # same as q, k, v = qkv[0], qkv[1], qkv[2]
 
         # Tis cosine similarity kernel instead of softmax
         q = q / q.norm(dim=-1, keepdim=True) 
