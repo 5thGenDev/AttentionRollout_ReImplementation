@@ -8,6 +8,8 @@ def argument_parser():
                         choices=['vit_base_16', 'vit_large_32', 'vit_huge_14'], 
                         help="Name of architecture")
     parser.add_argument('--drop_path_rate', type=float, default=0.1, help="stochastic depth rate")
+    parser.add_argument('--local_ckpt', action="store_true", help="load ckpt of a model instead of the PyTorch one")
+    parser.add_argument('--local_ckpt_path', type=str, help="path of local checkpoints")
 
     
     ## Optimizers
