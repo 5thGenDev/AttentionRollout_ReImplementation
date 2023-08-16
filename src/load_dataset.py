@@ -5,7 +5,7 @@ import sys
 import torch
 from torchvision import datasets as D
 from src.pets import OxfordIIIPets
-from src.flowers import Flowers
+from src.flowers import Flowers102
 
 
 def build_dataset(args, is_train, trnsfrm=None):
