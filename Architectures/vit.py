@@ -272,14 +272,22 @@ def vit_base_16(patch_size=16, **kwargs):
     model = VisionTransformer(
         patch_size=patch_size, embed_dim=768, depth=12, num_heads=12, mlp_ratio=4,
         qkv_bias=True, norm_layer=partial(nn.LayerNorm, eps=1e-6), **kwargs)
-    init_pretrained_weights(model, model_urls["vit_b_16"])
+    if args.pretrained:
+        checkpoint = torch.load(args.ckpt_path)
+        model.load_state_dict(checkpoint['model_state_dict'])
+    else:
+        init_pretrained_weights(model, model_urls["vit_b_16"])
     return model
 
 def vit_large_32(patch_size=32, **kwargs):
     model = VisionTransformer(
         patch_size=patch_size, embed_dim=768, depth=24, num_heads=16, mlp_ratio=4,
         qkv_bias=True, norm_layer=partial(nn.LayerNorm, eps=1e-6), **kwargs)
-    init_pretrained_weights(model, model_urls["vit_l_32"])
+    if args.pretrained:
+        checkpoint = torch.load(args.ckpt_path)
+        model.load_state_dict(checkpoint['model_state_dict'])
+    else:
+        init_pretrained_weights(model, model_urls["vit_l_32"])
     return model
 
 
@@ -287,5 +295,9 @@ def vit_huge_14(patch_size=14, **kwargs):
     model = VisionTransformer(
         patch_size=patch_size, embed_dim=1280, depth=32, num_heads=16, mlp_ratio=4,
         qkv_bias=True, norm_layer=partial(nn.LayerNorm, eps=1e-6), **kwargs)
-    init_pretrained_weights(model, model_urls["vit_h_14"])
+    if args.pretrained:
+        checkpoint = torch.load(args.ckpt_path)
+        model.load_state_dict(checkpoint['model_state_dict'])
+    else:
+        init_pretrained_weights(model, model_urls["vit_h_14"])
     return model
