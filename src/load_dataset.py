@@ -13,14 +13,14 @@ def build_dataset(args, is_train, trnsfrm=None):
         folder = 'OxfordIIIPets'
         split = 'trainval' if is_train else 'test'
         root = os.path.join(args.data_location, folder)
-        dataset = D.OxfordIIITPet(root=root, split=split, transform=trnsfrm, download=True,)
+        dataset = OxfordIIITPet(root=root, split=split, transform=trnsfrm, download=True,)
         classes = 37
 
     if args.data_set == 'Flowers':
         folder = 'Flowers102'
         split = 'train' if is_train else 'test'
         root = os.path.join(args.data_location, folder)
-        dataset = D.Flowers102(root=root, split=split, transform=trnsfrm, download=True,)
+        dataset = Flowers102(root=root, split=split, transform=trnsfrm, download=True,)
         classes = 102
 
     if args.data_set == 'CIFAR10':
