@@ -7,8 +7,7 @@ from typing import Any, Callable, Optional, Union, Tuple
 from typing import Sequence
 
 from PIL import Image
-
-from torchvision.datasets.utils import download_and_extract_archive, verify_str_arg
+from torchvision.datasets.utils import download_and_extract_archive, verify_str_arg, check_integrity, download_url
 from torchvision.datasets.vision import VisionDataset
 
 
