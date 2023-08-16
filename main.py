@@ -76,7 +76,7 @@ def main():
     ### main pipeline
     transform = build_transform(is_train=True)
     train_loader, classes = build_dataset(args, is_train=True, trnsfrm=transform)
-    model = vit.__dict__[args.model](img_size=224, num_classes=classes)
+    model = vit.__dict__[args.model](img_size=224, num_classes=classes, args)
     optimizer = init_optimizer(model, **optimizer_kwargs(args))
     scheduler = init_lr_scheduler(optimizer, **lr_scheduler_kwargs(args))
     criterion = nn.CrossEntropyLoss()
