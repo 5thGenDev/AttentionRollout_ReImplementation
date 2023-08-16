@@ -1,7 +1,7 @@
 ## Copied from https://pytorch.org/vision/stable/_modules/torchvision/datasets/flowers102.html#Flowers102
 
 import os
-import os.path as Path
+import os.path 
 import pathlib
 from typing import Any, Callable, Optional, Union, Tuple
 from typing import Sequence
@@ -56,7 +56,7 @@ class Flowers102(VisionDataset):
     ) -> None:
         super().__init__(root, transform=transform, target_transform=target_transform)
         self._split = verify_str_arg(split, "split", ("train", "val", "test"))
-        self._base_folder = Path(self.root) / "flowers-102"
+        self._base_folder = pathlib.Path(self.root) / "flowers-102"
         self._images_folder = self._base_folder / "jpg"
 
         if download:
