@@ -15,7 +15,7 @@ model_urls = {
     "vit_h_14": "http://download.pytorch.org/models/vit_h_14_lc_swag-c1eb923e.pth",
 }
 
-def init_pretrained_weights(model, model_url):
+def init_pretrained_weights(model, model_url, num_classes_new):
     """
     Initialize model with pretrained weights.
     Layers that don't match with pretrained layers in name or size are kept unchanged.
@@ -28,10 +28,14 @@ def init_pretrained_weights(model, model_url):
         if k in model_dict and model_dict[k].size() == v.size()
     }
     model_dict.update(pretrain_dict)
-    for param_tensor in model_dict:
-        print(param_tensor, "\t", model_dict[param_tensor].size())
     model.load_state_dict(model_dict)
-    print(f"Initialized model with pretrained weights from {model_url}")
+
+    # Change 768 into embed_dim of your pretrained ViT
+    model.head = nn.Linear(768*2, num_classes_new)
+    nn.init.xavier_uniform_(model.head.weight)
+    nn.init.zeros_(model.head.bias)
+
+    return model
 
 
 def _no_grad_trunc_normal_(tensor, mean, std, a, b):
