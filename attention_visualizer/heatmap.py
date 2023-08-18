@@ -23,4 +23,4 @@ def show_mask_on_image(img, mask):
     # Decreasing noise
     heatmapshow = cv2.GaussianBlur(heatmapshow, (5, 5), 0)
 
-    return np.uint8(255 * cam)
+    return heatmapshow
